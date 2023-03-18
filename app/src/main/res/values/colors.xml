@@ -11,5 +11,10 @@
     <color name="purple_200">#FFBB86FC</color>
 
     <color name="purple_700">#FF3700B3</color>
+    <color name="blue">#19A7CE</color>
+    <color name="dark_blue">#146C94</color>
+    <color name="light_blue">#97DEFF</color>
+
+
 
 </resources>
