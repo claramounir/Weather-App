@@ -11,4 +11,10 @@
     <string name="home_txt">Your Country</string>
     <string name="country_name_txt" />
     <string name="temperature_txt" />
+    <string name="pressure_txt">Pressure</string>
+    <string name="humidity_txt">humidity</string>
+    <string name="wind_txt">Wind</string>
+    <string name="visibility_txt">Visibility</string>
+    <string name="cloud_txt">Cloud</string>
+    <string name="u_v_txt">Ultra Violt</string>
 </resources>
