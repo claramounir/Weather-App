@@ -169,7 +169,7 @@
                                         app:layout_constraintTop_toBottomOf="@id/pressureValueTxt" />
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        
+
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="wrap_content"
