@@ -19,4 +19,9 @@
         android:name="com.example.weatherapp.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.weatherapp.detailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>
