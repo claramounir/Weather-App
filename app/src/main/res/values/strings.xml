@@ -17,4 +17,6 @@
     <string name="visibility_txt">Visibility</string>
     <string name="cloud_txt">Cloud</string>
     <string name="u_v_txt">Ultra Violt</string>
+    <string name="location_txt">Location</string>
+    <string name="Tempreture" />
 </resources>
