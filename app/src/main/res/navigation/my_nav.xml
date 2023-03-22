@@ -10,11 +10,6 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/onBoardingFragment"
-        android:name="com.example.weatherapp.onBoarding.view.OnBoardingFragment"
-        android:label="fragment_on_boarding"
-        tools:layout="@layout/fragment_on_boarding" />
-    <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.weatherapp.FavoriteFragment"
         android:label="fragment_favorite"
