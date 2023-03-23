@@ -1,11 +1,6 @@
 package com.example.weatherapp.model
-import android.media.Image
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+
 import com.google.gson.annotations.SerializedName
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
