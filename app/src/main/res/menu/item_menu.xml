@@ -13,7 +13,7 @@
         android:icon="@drawable/favourite"/>
 
 
-    <item android:id="@+id/nav_weekPlan"
+    <item android:id="@+id/nav_alert"
         android:title="Alert"
         android:icon="@drawable/alert"/>
 
