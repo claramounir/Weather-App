@@ -51,67 +51,6 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-//        val toolbar = getSupportActionBar();
-//
-//        loadFragment(HomeFragment.newInstance())
-//
-//        BottomNavigationView.setOnItemSelectedListener { item ->
-//            var fragment: Fragment
-//            when (item.itemId) {
-//                R.id.nav_home -> {
-//                    toolbar?.setTitle("Home")
-//                    fragment = HomeFragment()
-//                    loadFragment(fragment)
-//                    true
-//                }
-//                R.id.nav_account -> {
-//                    toolbar?.setTitle("Radio")
-//                    fragment = SettingFragment()
-//                    loadFragment(fragment)
-//                    true
-//
-//                }
-//                R.id.nav_alert -> {
-//                    toolbar?.setTitle("Search")
-//                    fragment = AlertFragment()
-//                    loadFragment(fragment)
-//                    true
-//
-//                }
-//                R.id.nav_fav -> {
-//                    toolbar?.setTitle("My Music")
-//                    fragment = FavoriteFragment()
-//                    loadFragment(fragment)
-//                    true
-//
-//                }
-//
-//                else -> false
-//            }
-//
-//        }
-//
-//        bottom_navigation.setOnItemReselectedListener { item ->
-//            when (item.itemId) {
-//                R.id.nav_home -> {
-//                    Toast.makeText(this, "Home Item reselected", Toast.LENGTH_SHORT).show()
-//                }
-//                R.id.nav_alert -> {
-//                    Toast.makeText(this, "Alert Item reselected", Toast.LENGTH_SHORT).show()
-//                }
-//                R.id.nav_account -> {
-//                    Toast.makeText(this, "SettingItem reselected", Toast.LENGTH_SHORT).show()
-//                }
-//                R.id.nav_fav -> {
-//                    Toast.makeText(this, "Favorite Item reselected", Toast.LENGTH_SHORT).show()
-//                }
-//
-//            }
-//        }
-//    }
-//
-
-//    }
     }
     private fun loadFragment(fragment: Fragment) {
         // load fragment
