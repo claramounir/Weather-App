@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class Repository (context: Context) {
-    private lateinit var remote: ApiInterface
-    private lateinit var room: RoomDB
+    private var remote: ApiInterface
+    private var room: RoomDB
 
     init {
         remote = RetrofitInstance().apiCall()
