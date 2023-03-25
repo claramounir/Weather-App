@@ -1,4 +1,3 @@
-package com.example.skiescue.data.local
 
 import Favourite
 import androidx.room.*

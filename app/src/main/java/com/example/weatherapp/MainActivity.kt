@@ -1,17 +1,14 @@
 package com.example.weatherapp
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherapp.favoriteScreen.view.FavoriteFragment
 import com.example.weatherapp.homeScreen.view.HomeFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-
 
 
 class MainActivity : AppCompatActivity() {
