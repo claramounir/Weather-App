@@ -14,30 +14,30 @@ import kotlinx.coroutines.launch
 
 class FavouriteViewModel (private val repo: Repository): ViewModel(){
 
-    private val _favouriteList = MutableStateFlow<List<Favourite>>(emptyList())
-    val favouriteList:StateFlow<List<Favourite>>
-        get() = _favouriteList
-
-    fun getFavouriteList(){
-        viewModelScope.launch {
-            repo.getFavourites()
-                .collect{
-                    _favouriteList.value = it
-                }
-        }
-    }
-
-    fun deleteFavourite(favourite: Favourite){
-        viewModelScope.launch {
-            repo.deleteFavourite(favourite)
-        }
-    }
-
-    fun insertFavourite(favourite: Favourite){
-        viewModelScope.launch {
-            repo.insertFavourite(favourite)
-        }
-    }
+//    private val _favouriteList = MutableStateFlow<List<Favourite>>(emptyList())
+//    val favouriteList:StateFlow<List<Favourite>>
+//        get() = _favouriteList
+//
+//    fun getFavouriteList(){
+//        viewModelScope.launch {
+//            repo.getFavourites()
+//                .collect{
+//                    _favouriteList.value = it
+//                }
+//        }
+//    }
+//
+//    fun deleteFavourite(favourite: Favourite){
+//        viewModelScope.launch {
+//            repo.deleteFavourite(favourite)
+//        }
+//    }
+//
+//    fun insertFavourite(favourite: Favourite){
+//        viewModelScope.launch {
+//            repo.insertFavourite(favourite)
+//        }
+//    }
 
 
 }

@@ -5,7 +5,6 @@
     android:layout_width="70dp"
     android:layout_height="125dp"
     android:layout_margin="10dp"
-
     app:cardCornerRadius="30dp"
     app:cardElevation="20dp">
 
@@ -23,17 +22,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/image_icon"
-            android:layout_width="44dp"
-            android:layout_height="43dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="36dp"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/icon"
+            android:layout_width="68dp"
+            android:layout_height="65dp"
+            app:cardCornerRadius="400dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hour_txt"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintStart_toEndOf="@+id/day_txt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            tools:ignore="UnknownIdInLayout">
+
+            <ImageView
+                android:id="@+id/hour_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/C_txt"
@@ -44,6 +52,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_icon" />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
