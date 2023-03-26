@@ -69,17 +69,18 @@ class Repository (  private var remote: ApiResponse
 //    suspend fun getAlert(id: Int): AlertModel {
 //        return room.alertDao().getAlert(id)
 //    }
-//
+
 
     // functions from Api calls
     suspend fun getWeatherDetalis(
-//        lat: Double,
-//        lon: Double,
+        lat: Double,
+        lon: Double,
 //        language: String,
 //        units: String,
-//        exclude: String? = null,
+        exclude: String? = null,
+        appid:String
 
     ): retrofit2.Response<WeatherResponse> {
-        return remote.OnSucess()
+        return remote.OnSucess(lat,lon)
     }
 }

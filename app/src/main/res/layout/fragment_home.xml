@@ -56,7 +56,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="24dp"
+                            android:fontFamily="@font/almendra_italic"
                             android:text="TextView"
+                            android:textSize="24sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,7 +68,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="24dp"
+                            android:fontFamily="@font/almendra_italic"
                             android:text="TextView"
+                            android:textSize="20sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/country_txt" />
 
@@ -76,7 +80,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="60dp"
                             android:layout_marginTop="72dp"
+                            android:fontFamily="@font/almendra_italic"
                             android:text="TextView"
+                            android:textSize="24sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/date_txt" />
 
@@ -255,7 +261,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="40dp"
+                                    android:layout_marginBottom="60dp"
                                     android:weightSum="3"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -392,7 +398,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="64dp"
                             android:layout_marginEnd="60dp"
+                            android:fontFamily="@font/almendra_italic"
                             android:text="TextView"
+                            android:textSize="20sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/date_txt" />
 
@@ -429,6 +437,7 @@
                         android:id="@+id/img_main"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/baby_pink"
                         tools:srcCompat="@tools:sample/avatars" />
                 </androidx.cardview.widget.CardView>
 

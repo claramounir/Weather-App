@@ -39,4 +39,9 @@
         android:name="com.example.weatherapp.AlertFragment"
         android:label="fragment_alert"
         tools:layout="@layout/fragment_alert" />
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.weatherapp.splashScreen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" />
 </navigation>
