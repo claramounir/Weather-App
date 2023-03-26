@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/icon_img"
+            android:id="@+id/day"
             android:layout_width="68dp"
             android:layout_height="65dp"
             android:layout_marginStart="32dp"
@@ -41,7 +41,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/day_txt"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintVertical_bias="0.4" >
+
+            <ImageView
+                android:id="@+id/day_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/sky_txt"
@@ -50,7 +57,7 @@
             android:layout_marginStart="32dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/icon_img"
+            app:layout_constraintStart_toEndOf="@+id/day"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

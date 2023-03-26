@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.network.ApiResponse
 import com.example.weatherapp.model.Repository
 import com.example.weatherapp.model.WeatherResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 
 class HomeViewModel(private val repo: Repository) : ViewModel() {
 
@@ -21,31 +24,34 @@ class HomeViewModel(private val repo: Repository) : ViewModel() {
         locationProvide.value = item
     }
 
-    private val _weatherDetails = MutableStateFlow<ApiResponse<WeatherResponse>>(ApiResponse.OnLoading())
-    val weatherDetails: StateFlow<ApiResponse<WeatherResponse>>
-        get() = _weatherDetails
+    val _weatherDetails = MutableLiveData<WeatherResponse>()
+//    val weatherDetails: StateFlow<ApiResponse<WeatherResponse>>
+//        get() = _weatherDetails
 
 
 
     fun getWeatherDetails(
-        lat:Double,
-        lon: Double,
-        exclude: String ,
-        units: String,
-        language: String,
+//        lat:Double,
+//        lon: Double,
+//        exclude: String ,
+//        units: String,
+//        language: String,
     ){
         // here the data come , i wil send it by live data
         viewModelScope.launch {
-            // _weatherDetails.value = repo.getWeatherDetalis(lat, lon, exclude, units)
 
-            // for test insertion
-            repo.getWeatherDetalis(lat, lon, exclude, units, language).catch {
-                _weatherDetails.value = ApiResponse.onError(it.message.toString())
-            }.collect(){
-                    //  repo.insertFavourite(Favourite(latitude = it.lat, longitude = it.lon, city = it.timezone!!))
-                    _weatherDetails.value = ApiResponse.OnSucess(it)
-
-                }
+            var resonseData = repo.getWeatherDetalis()
+         withContext(Dispatchers.Main){
+             _weatherDetails.value = resonseData.body()
+         }
+//            // for test insertion
+//            repo.getWeatherDetalis(lat, lon, exclude, units, language).catch {
+//                _weatherDetails.value = ApiResponse.onError(it.message.toString())
+//            }.collect(){
+//                    //  repo.insertFavourite(Favourite(latitude = it.lat, longitude = it.lon, city = it.timezone!!))
+//                    _weatherDetails.value = ApiResponse.OnSucess
+//
+//                }
 
 
 
