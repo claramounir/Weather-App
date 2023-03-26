@@ -46,7 +46,7 @@
                 android:layout_height="63dp"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="60dp"
                 android:src="@drawable/bell"
 
                 app:backgroundTint="@color/baby_pink"

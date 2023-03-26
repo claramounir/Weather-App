@@ -31,16 +31,17 @@ class HomeViewModel(private val repo: Repository) : ViewModel() {
 
 
     fun getWeatherDetails(
-//        lat:Double,
-//        lon: Double,
-//        exclude: String ,
+       lat:Double,
+      lon: Double,
+      exclude: String ,
 //        units: String,
 //        language: String,
+    appid: String
     ){
         // here the data come , i wil send it by live data
         viewModelScope.launch {
 
-            var resonseData = repo.getWeatherDetalis()
+            var resonseData = repo.getWeatherDetalis(lat,lon,exclude,appid)
          withContext(Dispatchers.Main){
              _weatherDetails.value = resonseData.body()
          }

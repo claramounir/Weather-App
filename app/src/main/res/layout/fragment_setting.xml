@@ -332,16 +332,18 @@
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="50dp"
                 android:backgroundTint="@color/baby_purple"
                 android:elevation="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lang_txt" >
+                app:layout_constraintTop_toBottomOf="@+id/lang_txt">
 
                 <RadioGroup
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <RadioButton
                         android:id="@+id/radio_arabic"
