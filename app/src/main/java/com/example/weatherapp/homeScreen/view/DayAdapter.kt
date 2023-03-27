@@ -12,7 +12,7 @@ import java.util.*
 
 class DayAdapter(var current: List<Daily>) : RecyclerView.Adapter<DayAdapter.ViewHolder>(){
     lateinit var context: Context
-    lateinit var binding: RowDaysBinding
+    lateinit var clara: RowDaysBinding
     class ViewHolder (var binding :RowDaysBinding): RecyclerView.ViewHolder(binding.root){
 
     }
@@ -20,8 +20,8 @@ class DayAdapter(var current: List<Daily>) : RecyclerView.Adapter<DayAdapter.Vie
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context=parent.context
         val inflater: LayoutInflater =parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding= RowDaysBinding.inflate(inflater,parent,false)
-        return ViewHolder(binding)
+       clara= RowDaysBinding.inflate(inflater,parent,false)
+        return ViewHolder(clara)
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +32,7 @@ class DayAdapter(var current: List<Daily>) : RecyclerView.Adapter<DayAdapter.Vie
         Glide.with(context).load("https://openweathermap.org/img/wn/${currentObj.weather.get(0).icon}@2x.png").into(holder.binding.dayImg)
         val max = currentObj.temp?.max?.let { Math.ceil(it).toInt() }
         val min = currentObj.temp?.min?.let { Math.ceil(it).toInt() }
-        binding.degreeTxt.text="$max/$min°C"
+        holder.binding.degreeTxt.text="$max/$min°C"
         val date= Date(currentObj.dt*1000L)
         val sdf= SimpleDateFormat("d")
         sdf.timeZone= TimeZone.getDefault()
@@ -42,6 +42,6 @@ class DayAdapter(var current: List<Daily>) : RecyclerView.Adapter<DayAdapter.Vie
         calendar.set(Calendar.DAY_OF_MONTH,intDay)
         val format=SimpleDateFormat(/* pattern = */ "EEEE")
         val day=format.format(calendar.time)
-        binding.dayTxt.text=day
+        holder.binding.dayTxt.text=day
         holder.binding.skyTxt.text= currentObj.weather.get(0).description    }
 }

@@ -1,21 +1,20 @@
 package com.example.weatherapp.homeScreen.viewModel
 
+import android.content.Context
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.data.network.ApiResponse
+import com.example.weatherapp.Constant
 import com.example.weatherapp.model.Repository
 import com.example.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 
-class HomeViewModel(private val repo: Repository) : ViewModel() {
+class HomeViewModel(private val repo: Repository, val context: Context, val gps: MyLocation) : ViewModel() {
 
     // for dialog
     private val locationProvide: MutableLiveData<Int> = MutableLiveData()
@@ -25,15 +24,19 @@ class HomeViewModel(private val repo: Repository) : ViewModel() {
     }
 
     val _weatherDetails = MutableLiveData<WeatherResponse>()
-//    val weatherDetails: StateFlow<ApiResponse<WeatherResponse>>
-//        get() = _weatherDetails
 
 
+fun  getLocation(context: Context){
+    gps.getLastLocation()
+    gps.data.observe(context as LifecycleOwner, Observer {
+        getWeatherDetails(it.latitude,it.longitude,Constant.appId)
+    })
+}
 
     fun getWeatherDetails(
        lat:Double,
       lon: Double,
-      exclude: String ,
+//      exclude: String ,
 //        units: String,
 //        language: String,
     appid: String
@@ -41,7 +44,7 @@ class HomeViewModel(private val repo: Repository) : ViewModel() {
         // here the data come , i wil send it by live data
         viewModelScope.launch {
 
-            var resonseData = repo.getWeatherDetalis(lat,lon,exclude,appid)
+            var resonseData = repo.getWeatherDetalis(lat,lon,appid)
          withContext(Dispatchers.Main){
              _weatherDetails.value = resonseData.body()
          }
