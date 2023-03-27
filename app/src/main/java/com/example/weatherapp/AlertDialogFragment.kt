@@ -56,7 +56,7 @@ class AlertDialogFragment : Fragment() {
     }
 
     fun showDailog() {
-        
+
         var selectedFruits = location[selectedLocationIndex]
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Please, Choose your location ")

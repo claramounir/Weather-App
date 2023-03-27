@@ -19,7 +19,7 @@ class HourAdapter(var hourly: List<Hourly>) : RecyclerView.Adapter<HourAdapter.V
 
 
     lateinit var context: Context
-    lateinit var binding: RowTemperatureBinding
+    lateinit var sara: RowTemperatureBinding
     class ViewHolder (var binding : RowTemperatureBinding): RecyclerView.ViewHolder(binding.root){
 
     }
@@ -27,8 +27,8 @@ class HourAdapter(var hourly: List<Hourly>) : RecyclerView.Adapter<HourAdapter.V
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context=parent.context
         val inflater: LayoutInflater =parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding=  RowTemperatureBinding.inflate(inflater,parent,false)
-        return ViewHolder(binding)
+       sara=  RowTemperatureBinding.inflate(inflater,parent,false)
+        return ViewHolder(sara)
     }
 
     @SuppressLint("SetTextI18n")

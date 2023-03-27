@@ -77,7 +77,7 @@ class Repository (  private var remote: ApiResponse
         lon: Double,
 //        language: String,
 //        units: String,
-        exclude: String? = null,
+//        exclude: String? = null,
         appid:String
 
     ): retrofit2.Response<WeatherResponse> {
