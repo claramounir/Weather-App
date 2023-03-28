@@ -53,12 +53,12 @@
             android:id="@+id/action_alertDialogFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_alertDialogFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
+            android:id="@+id/action_alertDialogFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.weatherapp.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        android:id="@+id/mapsFragment"
+        android:name="com.example.weatherapp.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>
