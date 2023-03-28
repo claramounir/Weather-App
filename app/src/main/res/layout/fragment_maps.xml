@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsFragment" >
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:background="@color/color3"
+tools:ignore="MissingConstraints">
+
+
+<FrameLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="7"
+    android:layout_margin="10dp">
+
+    <EditText
+        android:id="@+id/search_Edt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:drawableStart="@drawable/baseline_location_on"
+        android:drawablePadding="70dp"
+        android:drawableTint="@color/baby_pink"
+        android:hint="Search Your Location"
+        android:imeOptions="actionSearch"
+        android:paddingStart="10dp"
+        android:singleLine="true"
+        android:textColorHint="@color/baby_purple"
+        android:textSize="16sp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</FrameLayout>
+
+
+
+
+
+</LinearLayout>
+</fragment>
