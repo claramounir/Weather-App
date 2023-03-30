@@ -11,21 +11,21 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.Response
 
-class Repository (  private var remote: ApiResponse
-//                    private var room: RoomDB
+class Repository (  private var remote: ApiResponse,
+                    private var room: RoomDB
                  ) {
 
     companion object{
         private var instance:Repository?=null
         fun getInstance(
             apiResponse: ApiResponse,
-//            roomDB: RoomDB
-//localSourceInterface: LocalSourceInterface
+            roomDB: RoomDB,
+localSourceInterface: LocalSourceInterface
         ):Repository{
             return instance?: synchronized(this){
                 val temp =Repository(
-                  apiResponse
-//                    roomDB
+                  apiResponse,
+                    roomDB
                 )
                 instance=temp
                 temp
@@ -35,21 +35,21 @@ class Repository (  private var remote: ApiResponse
 
     // functions from fav dao
 
-//    fun getFavourites(): Flow<List<Favourite>> {
-//        return room.favouriteDao().getFavourites()
-//    }
-//
-//    suspend fun insertFavourite(favourite: Favourite) {
-//        room.favouriteDao().insertFavourite(favourite)
-//    }
-//
-//
-//    suspend fun deleteFavourite(favourite: Favourite) {
-//        room.favouriteDao().deleteFavourite(favourite)
-//    }
-//
-//
-//    // alerts
+    fun getFavourites(): Flow<List<Favourite>> {
+        return room.favouriteDao().getFavourites()
+    }
+
+    suspend fun insertFavourite(favourite: Favourite) {
+        room.favouriteDao().insertFavourite(favourite)
+    }
+
+
+    suspend fun deleteFavourite(favourite: Favourite) {
+        room.favouriteDao().deleteFavourite(favourite)
+    }
+
+
+    // alerts
 //
 //    fun getAlerts(): Flow<List<AlertModel>> {
 //        return room.alertDao().getAlerts()

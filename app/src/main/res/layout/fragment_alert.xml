@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
 
-    tools:context=".AlertFragment">
+    tools:context=".alertDialog.AlertFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/main_card"
@@ -28,7 +28,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/alert_rv"
+                android:id="@+id/fav_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"

@@ -117,20 +117,20 @@ data class WeatherResponse(
 
 
 
-//enum class Units(var unit: String) {
-//    IMPERIAL("imperial"),
-//    METRIC("metric"),
-//    STANDARD("standard")
-//
-//}
-//
-//enum class Languages(var language: String) {
-//    ENGLISH("en"),
-//    ARABIC("ar")
-//}
-//
-//enum class Location(var location: String) {
-//    MAP("MAP"),
-//    GPS("GPS")
-//
-//}
+enum class Units(var unit: String) {
+    IMPERIAL("imperial"),
+    METRIC("metric"),
+    STANDARD("standard")
+
+}
+
+enum class Languages(var language: String) {
+    ENGLISH("en"),
+    ARABIC("ar")
+}
+
+enum class Location(var location: String) {
+    MAP("MAP"),
+    GPS("GPS")
+
+}

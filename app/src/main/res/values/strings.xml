@@ -19,4 +19,27 @@
     <string name="u_v_txt">Ultra Violt</string>
     <string name="location_txt">Location</string>
     <string name="Tempreture" />
+    <string name="LAT" translatable="false">LAT</string>
+    <string name="LON" translatable="false">LON</string>
+    <string name="shared_pref" translatable="false">com.example.weatherapp</string>
+    <string name="ID">ID</string>
+    <string name="temperature">Temperature</string>
+    <string name="units">Units</string>
+    <string name="celsius">Temperature is Celsius, Speed is m/s </string>
+    <string name="Kelvin">Temperature is Kelvin, Speed is m/s</string>
+    <string name="fahrenheit">Temperature is Fahrenheit, Speed is mm/h</string>
+    <string name="TIMEZONE" translatable="false">TIMEZONE</string>
+    <string name="MAP" translatable="false">MAP</string>
+    <string name="FIRST" translatable="false">FIRST</string>
+    <string name="GPS" translatable="false">GPS</string>
+    <string name="LOCATION" translatable="false">LOCATION</string>
+    <string name="UNITS" translatable="false">UNITS</string>
+    <string name="FAV_FLAG" translatable="false">FLAG</string>
+    <string name="LOCATIONCHOICE" translatable="false">LOCATIONCHOICE</string>
+    <string name="MiliPerHour">mm/h</string>
+    <string name="MeterPerSecond">m/s</string>
+    <string name="SuccessDeleted">Successfully Deleted</string>
+
+
+
 </resources>

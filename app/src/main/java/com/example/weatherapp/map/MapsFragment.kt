@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.map
 
 import android.location.Address
 import android.location.Geocoder
@@ -10,7 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.navigation.NavController
+import com.example.weatherapp.MainActivity
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentMapsBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
