@@ -1,6 +1,5 @@
 package com.example.weatherapp.favoriteScreen.view
 
-import Favourite
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
+import com.example.weatherapp.data.local.Favourite
 import com.example.weatherapp.databinding.FragmentFavoriteBinding
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModelFactory
 import com.example.weatherapp.favoriteScreen.viewModel.FavouriteViewModel

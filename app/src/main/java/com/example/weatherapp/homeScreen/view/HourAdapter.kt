@@ -15,11 +15,18 @@ import com.example.weatherapp.model.Hourly
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HourAdapter(var hourly: List<Hourly>) : RecyclerView.Adapter<HourAdapter.ViewHolder>(){
+class HourAdapter() : RecyclerView.Adapter<HourAdapter.ViewHolder>(){
 
 
     lateinit var context: Context
     lateinit var sara: RowTemperatureBinding
+
+    private var hourly = emptyList<Hourly>()
+    fun setWeatherHours(weatherHours: List<Hourly>) {
+        this.hourly = weatherHours
+        notifyDataSetChanged()
+    }
+
     class ViewHolder (var binding : RowTemperatureBinding): RecyclerView.ViewHolder(binding.root){
 
     }

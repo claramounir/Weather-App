@@ -1,6 +1,5 @@
 package com.example.weatherapp.favoriteScreen.view
 
-import Favourite
 import android.location.Address
 import android.location.Geocoder
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
+import com.example.weatherapp.data.local.Favourite
 import com.example.weatherapp.databinding.RowFavBinding
 import com.example.weatherapp.model.getCurrentLan
 import com.example.weatherapp.model.initFavSharedPref

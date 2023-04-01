@@ -3,6 +3,7 @@ package com.example.weatherapp.homeScreen.view
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.databinding.RowDaysBinding
@@ -10,9 +11,15 @@ import com.example.weatherapp.model.Daily
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DayAdapter(var current: List<Daily>) : RecyclerView.Adapter<DayAdapter.ViewHolder>(){
+class DayAdapter(private val fragment: Fragment) : RecyclerView.Adapter<DayAdapter.ViewHolder>(){
     lateinit var context: Context
     lateinit var clara: RowDaysBinding
+    private var current = emptyList<Daily>()
+    fun setWeatherDay(weatherDays: List<Daily>) {
+        this.current = weatherDays
+        notifyDataSetChanged()
+    }
+
     class ViewHolder (var binding :RowDaysBinding): RecyclerView.ViewHolder(binding.root){
 
     }

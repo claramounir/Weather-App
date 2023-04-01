@@ -1,8 +1,6 @@
+package com.example.weatherapp.data.local
 
 
-import Converter
-import Favourite
-import FavouriteDao
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -12,11 +10,11 @@ import com.example.weatherapp.model.AlertDao
 import com.example.weatherapp.model.AlertModel
 
 
-@Database(entities = [Favourite::class, AlertModel::class], version = 1, exportSchema = false)
+@Database(entities = [Favourite::class, AlertModel::class], version = 5, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class RoomDB:RoomDatabase(){
     abstract fun favouriteDao():FavouriteDao
-    abstract fun alertDao(): AlertDao
+    abstract fun alertDao():AlertDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
@@ -30,9 +28,11 @@ abstract class RoomDB:RoomDatabase(){
         }
 
         private fun createDatabase(context: Context)=
-            Room.databaseBuilder(context.applicationContext, RoomDB::class.java, "favourite.db"
+            Room.databaseBuilder(context.applicationContext,
+                RoomDB::class.java,"favourite.db"
+
             ).fallbackToDestructiveMigration()
-                .build()
+
+        .build()
     }
 }
-

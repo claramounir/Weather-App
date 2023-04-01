@@ -10,6 +10,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
 import android.provider.Settings
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -100,5 +101,19 @@ _data.postValue(
             requestPermissions()
         }
     }
+    fun updateLocationFromGPS() {
 
+        fusedClient = LocationServices.getFusedLocationProviderClient(context)
+        if(checkPermissions()){
+            if(isLocationEnabled()){
+                Toast.makeText(context, "Permission Granted", Toast.LENGTH_LONG).show()
+                getLastLocation()
+            } else{
+                Toast.makeText(context, "Should Enable Location", Toast.LENGTH_LONG).show()
+            }
+
+        }else{
+            requestPermissions()
+        }
+    }
 }

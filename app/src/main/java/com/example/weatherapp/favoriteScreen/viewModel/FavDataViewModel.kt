@@ -1,9 +1,9 @@
 package com.example.weatherapp.favoriteScreen.viewModel
 
 
-import Favourite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.data.local.Favourite
 import com.example.weatherapp.model.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

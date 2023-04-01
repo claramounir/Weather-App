@@ -1,5 +1,5 @@
+package com.example.weatherapp.data.local
 
-import Favourite
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
