@@ -19,7 +19,7 @@ class ApiResponse {
          }
       }
    }
-   suspend fun OnSucess(lat : Double, long:Double): Response<WeatherResponse> {
+   suspend fun getWeatherFromApi(lat : Double, long:Double,exclude:String,appid:String): Response<WeatherResponse> {
 var x=api.getWeatherDetalis(lat,long)
       x.body()?.icon?.let { Log.i("el data", it)
       }

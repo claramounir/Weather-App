@@ -6,7 +6,10 @@
     android:layout_height="wrap_content"
     android:background="@drawable/gradient"
     android:isScrollContainer="true"
-    android:visibility="visible">
+    android:visibility="visible"
+    tools:context=".homeScreen.view.HomeFragment"
+
+    >
 
 
     <ScrollView

@@ -1,25 +1,42 @@
 package com.example.weatherapp.homeScreen.view
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherapp.Constant
 import com.example.weatherapp.Constant.MBAR
-import com.example.weatherapp.homeScreen.viewModel.MyLocation
+import com.example.weatherapp.data.local.ConcreteLocalSource
 import com.example.weatherapp.data.network.ApiResponse
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.homeScreen.viewModel.HomeViewModel
 import com.example.weatherapp.homeScreen.viewModel.HomeViewModelFactory
 import com.example.weatherapp.model.Repository
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +50,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var geocoder: Geocoder
     private lateinit var fusedClient : FusedLocationProviderClient
+    private var _data : MutableLiveData<LatLng> = MutableLiveData<LatLng>()
+    val data: LiveData<LatLng> = _data
 
 
 
@@ -42,25 +61,28 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-   var gps= MyLocation(requireContext())
+//Location Gps
+        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+        fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        getLastLocation()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        geocoder = Geocoder(requireActivity(), Locale.getDefault())
+        myViewModelFactory = HomeViewModelFactory(Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource.getInstance(requireContext())))
 
-
-        myViewModelFactory = HomeViewModelFactory(Repository.getInstance(ApiResponse.getINSTANCE()),requireContext(),gps)
 
         myViewModel =
             ViewModelProvider(this.requireActivity(), myViewModelFactory)[HomeViewModel::class.java]
-        myViewModel.getLocation(requireContext())
 //        (myViewModel as HomeViewModel).getWeatherDetails(lat)
-        (myViewModel as HomeViewModel)._weatherDetails.observe(viewLifecycleOwner) {
+        (myViewModel as HomeViewModel).weatherDetails.observe(viewLifecycleOwner) {
          val adress = it.lat?.let { it1 -> it.lon?.let { it2 ->
              geocoder.getFromLocation(it1,
                  it2,1)
-         } }
-            _binding!!.countryTxt?.text = adress?.get(0)?.adminArea+"-"+adress?.get(0)?.countryName
+
+         }
+         }
+
+            _binding!!.countryTxt?.text = adress?.get(0)?.getAddressLine(0)!!.split(",")[1]
 //            _binding?.countryTxt?.text = it.timezone
             _binding?.CelsusTxt?.text = it.current?.temp.toString() + Constant.CELSIUS
             val dayhome= it.current?.dt?.let { it1 -> getCurrentDay(it1.toInt()) }
@@ -114,6 +136,84 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    @SuppressLint("MissingPermission")
+    private  fun  requestNewLocationDate(){
+        val mLocationRequest = com.google.android.gms.location.LocationRequest()
+        mLocationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY)
+        mLocationRequest.setInterval(0)
+        fusedClient = LocationServices.getFusedLocationProviderClient(context as Activity)
+        fusedClient.requestLocationUpdates(
+            mLocationRequest , mLocationCallback,
+            Looper.myLooper()
+        )
+    }
+
+
+    private val mLocationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            val mLastLocation: Location? = locationResult.lastLocation
+            if (mLastLocation != null) {
+                (myViewModel as HomeViewModel).getWeatherDetails(
+                    mLastLocation.latitude,
+                    mLastLocation.longitude,
+                    "exclude", "a62af663ada4f8dbf13318c557451a3b"
+                )
+            }
+            stopLocationUpdates()
+        }
+    }
+
+
+
+    private fun checkPermissions():Boolean{
+        val result =
+            ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission( requireActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+        return result
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+           requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+
+    private  fun  requestPermissions(){
+        ActivityCompat.requestPermissions(
+           requireActivity(), arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ), Constant.PERMISSIN_ID
+        )
+    }
+    private fun stopLocationUpdates() {
+        fusedClient.removeLocationUpdates(mLocationCallback)
+    }
+    override fun onResume() {
+        super.onResume()
+        getLastLocation()
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getLastLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                requestNewLocationDate()
+
+            } else {
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                ContextCompat.startActivity(requireActivity(), intent, null)
+            }
+        } else {
+            requestPermissions()
+        }
     }
 
 
