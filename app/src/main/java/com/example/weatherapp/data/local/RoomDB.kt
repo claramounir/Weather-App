@@ -1,38 +1,29 @@
+package com.example.weatherapp.data.local
 
-
-import Converter
-import Favourite
-import FavouriteDao
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.example.weatherapp.model.AlertDao
 import com.example.weatherapp.model.AlertModel
+import com.example.weatherapp.model.Favourite
 
+//class RoomDB {
+//}
 
-@Database(entities = [Favourite::class, AlertModel::class], version = 1, exportSchema = false)
-@TypeConverters(Converter::class)
-abstract class RoomDB:RoomDatabase(){
-    abstract fun favouriteDao():FavouriteDao
-    abstract fun alertDao(): AlertDao
+@Database(entities = arrayOf(Favourite::class, AlertModel::class), version = 4 )
 
-    companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
+abstract class RoomDB : RoomDatabase() {
+    abstract fun getWeathersDao(): FavouriteDao
+    companion object{
         @Volatile
         private var INSTANCE: RoomDB? = null
-        private val LOCK = Any()
-
-        operator fun invoke(context: Context) = INSTANCE?: synchronized(LOCK){
-            INSTANCE ?: createDatabase(context).also{INSTANCE = it}
+        fun getInstance (ctx: Context): RoomDB{
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    ctx.applicationContext, RoomDB::class.java, "favname3")
+                    .build()
+                INSTANCE = instance
+                instance }
         }
-
-        private fun createDatabase(context: Context)=
-            Room.databaseBuilder(context.applicationContext, RoomDB::class.java, "favourite.db"
-            ).fallbackToDestructiveMigration()
-                .build()
     }
 }
-

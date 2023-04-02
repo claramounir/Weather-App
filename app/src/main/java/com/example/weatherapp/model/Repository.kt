@@ -1,30 +1,21 @@
 package com.example.weatherapp.model
 
-import Favourite
-import RetrofitInstance
-import RoomDB
-import android.content.Context
 
-import com.example.weatherapp.data.network.ApiInterface
+import com.example.weatherapp.data.local.LocalInterface
 import com.example.weatherapp.data.network.ApiResponse
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import okhttp3.Response
+import retrofit2.Response
 
-class Repository (  private var remote: ApiResponse
-//                    private var room: RoomDB
-                 ) {
 
+class Repository (  private var remote: ApiResponse,var localSource: LocalInterface ) :RepositoryInterface{
+
+    lateinit var myResponse: Response<WeatherResponse>
     companion object{
         private var instance:Repository?=null
-        fun getInstance(
-            apiResponse: ApiResponse,
-//            roomDB: RoomDB
-//localSourceInterface: LocalSourceInterface
-        ):Repository{
+        fun getInstance( remote: ApiResponse,localSource: LocalInterface ):Repository{
+
             return instance?: synchronized(this){
                 val temp =Repository(
-                  apiResponse
+                 remote , localSource
 //                    roomDB
                 )
                 instance=temp
@@ -35,18 +26,34 @@ class Repository (  private var remote: ApiResponse
 
     // functions from fav dao
 
-//    fun getFavourites(): Flow<List<Favourite>> {
-//        return room.favouriteDao().getFavourites()
-//    }
-//
-//    suspend fun insertFavourite(favourite: Favourite) {
-//        room.favouriteDao().insertFavourite(favourite)
-//    }
-//
-//
-//    suspend fun deleteFavourite(favourite: Favourite) {
-//        room.favouriteDao().deleteFavourite(favourite)
-//    }
+
+    override suspend fun  insertToFavorite(fav: Favourite) {
+      localSource.insertToFavorite(fav)
+    }
+
+    override suspend fun deleteFromFavorite(fav: Favourite) {
+        localSource.deleteFromFavorite(fav)
+    }
+
+    override suspend fun getFavorites(): List<Favourite> {
+        return localSource.getFavorites()
+
+    }
+
+    override suspend fun getWeatherFromApi(
+        lat: Double,
+        lon: Double,
+        exclude: String,
+        appid: String
+    ): Response<WeatherResponse> {
+        val response = remote.getWeatherFromApi(lat, lon, exclude, appid)
+        if (response.isSuccessful == true) {
+            response!!.also { myResponse = it }
+        }
+        return myResponse
+    }
+
+
 //
 //
 //    // alerts
@@ -72,15 +79,15 @@ class Repository (  private var remote: ApiResponse
 
 
     // functions from Api calls
-    suspend fun getWeatherDetalis(
-        lat: Double,
-        lon: Double,
-//        language: String,
-//        units: String,
-//        exclude: String? = null,
-        appid:String
-
-    ): retrofit2.Response<WeatherResponse> {
-        return remote.OnSucess(lat,lon)
-    }
+//    suspend fun getWeatherDetalis(
+//        lat: Double,
+//        lon: Double,
+////        language: String,
+////        units: String,
+////        exclude: String? = null,
+//        appid:String
+//
+//    ): retrofit2.Response<WeatherResponse> {
+//        return remote.OnSucess(lat,lon)
+//    }
 }
