@@ -63,9 +63,7 @@ private lateinit var binding:FragmentFavoriteBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addBtn.setOnClickListener{
-//            val action = FavoriteFragmentDirections.favoriteToMap()
-//            Navigation.findNavController(it).navigate(action)
-//            Navigation.findNavController(it).navigate(R.id.favorite_to_map)
+
             val action=FavoriteFragmentDirections.actionFavoriteFragmentToMapsFragment()
             findNavController().navigate(action)
 

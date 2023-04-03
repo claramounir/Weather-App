@@ -47,6 +47,7 @@ class FavoriteAdapter(private var list:List<Favourite>, val onClick:OnFavClickLi
 
         }
 
+
         holder.binding.cardFav.setOnClickListener {
             if (lon != null) {
                 if (lat != null) {
