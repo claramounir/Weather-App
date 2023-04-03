@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splashScreen.SplashFragment">
+
+ <com.airbnb.lottie.LottieAnimationView
+     android:id="@+id/splash_animation"
+     android:layout_width="408dp"
+     android:layout_height="306dp"
+     android:layout_marginBottom="164dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintHorizontal_bias="0.333"
+     app:layout_constraintStart_toStartOf="parent"
+     app:lottie_autoPlay="true"
+     app:lottie_fileName="data.json"
+     app:lottie_loop="true"
+     app:lottie_speed="1">
+
+ </com.airbnb.lottie.LottieAnimationView>
+
+ <TextView
+     android:id="@+id/textView2"
+     android:layout_width="73dp"
+     android:layout_height="18dp"
+     android:layout_marginTop="100dp"
+     android:text="@string/project_name"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

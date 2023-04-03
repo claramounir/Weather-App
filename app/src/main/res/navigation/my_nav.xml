@@ -88,4 +88,9 @@
             android:id="@+id/action_mapsFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.weatherapp.splashScreen.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" />
 </navigation>
