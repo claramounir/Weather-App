@@ -10,8 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.weatherapp.data.local.ConcreteLocalSource
+import com.example.weatherapp.data.network.ApiResponse
 import com.example.weatherapp.databinding.FragmentMapsBinding
+import com.example.weatherapp.favoriteScreen.view.FavoriteFragmentDirections
+import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModel
+import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModelFactory
+import com.example.weatherapp.homeScreen.viewModel.HomeViewModel
+import com.example.weatherapp.homeScreen.viewModel.HomeViewModelFactory
+import com.example.weatherapp.model.Favourite
+import com.example.weatherapp.model.Repository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -23,18 +34,28 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlin.properties.Delegates
 
 class MapsFragment : Fragment() {
 lateinit var binding: FragmentMapsBinding
 lateinit var fusedClient:FusedLocationProviderClient
 lateinit var mapFragment: SupportMapFragment
 lateinit var mMap: GoogleMap
-lateinit var mainActivity: MainActivity
+      lateinit var lat: String
+    lateinit var long: String
+    lateinit var mainActivity: MainActivity
+    lateinit var homeViewModel: HomeViewModel
+    lateinit var homeViewModelFactory: HomeViewModelFactory
+    lateinit var favoriteViewModel: FavoriteViewModel
+    lateinit var favoriteViewModelFactory: FavoriteViewModelFactory
+    var fav:Favourite = Favourite(0.0,0.0,"default")
     private val callback = OnMapReadyCallback { googleMap ->
         mMap = googleMap
         mMap.setOnMapClickListener {
             mMap.clear()
             mMap.addMarker(MarkerOptions().position(it))
+            lat =it.latitude.toString()
+            long=it.longitude.toString()
             goToLatLng(it.latitude,it.longitude,16f)
         }
 
@@ -45,11 +66,34 @@ lateinit var mainActivity: MainActivity
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        homeViewModelFactory = HomeViewModelFactory(Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource.getInstance(requireContext())))
+        homeViewModel =
+            ViewModelProvider(this.requireActivity(), homeViewModelFactory)[HomeViewModel::class.java]
+        favoriteViewModelFactory = FavoriteViewModelFactory(
+            Repository.getInstance(
+                ApiResponse.getINSTANCE(),ConcreteLocalSource.getInstance(requireContext())
+            )
+        )
+        // viewmodel
+        favoriteViewModel = ViewModelProvider(requireActivity(),favoriteViewModelFactory)[FavoriteViewModel::class.java]
         binding = FragmentMapsBinding.inflate(inflater,container,false)
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(callback)
         mapInitialize()
+        binding.saveBtn.setOnClickListener{
+            homeViewModel.getWeatherDetails(lat.toDouble(),long.toDouble(),"exclude","a62af663ada4f8dbf13318c557451a3b")
+            homeViewModel.weatherDetails.observe(viewLifecycleOwner){
+
+                    fav.latitude = it.lat!!
+                    fav.longitude = it.lon!!
+                    fav.city = it.timezone
+
+                    favoriteViewModel.insertFavWeather(fav)
+                    val action = MapsFragmentDirections.actionMapsFragmentToFavoriteFragment()
+                    Navigation.findNavController(requireView()).navigate(action)
+
+            }
+        }
         return binding.root
     }
 
@@ -87,7 +131,10 @@ private fun goToSearchLocation(){
     var searchLocation = binding.searchEdt.text.toString()
     var list = Geocoder(requireContext()).getFromLocationName(searchLocation,1)
     if (list!= null && list.size>0){
+
         var address: Address = list.get(0)
+        lat =address.latitude.toString()
+        long=address.longitude.toString()
         goToLatLng(address.latitude,address.longitude,16f)
     }
 

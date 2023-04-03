@@ -36,9 +36,6 @@ class HomeViewModel(private val repo: RepositoryInterface) : ViewModel() {
              _weatherDetails.value = resonseData.body()
          }
 
-
-
-
         }
 
     }
