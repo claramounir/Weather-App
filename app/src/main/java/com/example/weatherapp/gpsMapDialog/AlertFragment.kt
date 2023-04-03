@@ -21,6 +21,7 @@ class AlertFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_alert, container, false)
+
     }
 
     companion object {
