@@ -64,7 +64,7 @@ private lateinit var binding:FragmentFavoriteBinding
         super.onViewCreated(view, savedInstanceState)
         binding.addBtn.setOnClickListener{
 
-            val action=FavoriteFragmentDirections.actionFavoriteFragmentToMapsFragment()
+            val action=FavoriteFragmentDirections.actionFavoriteFragmentToMapsFragment(1)
             findNavController().navigate(action)
 
         }

@@ -2,9 +2,11 @@ package com.example.weatherapp.data.local
 
 
 import android.content.Context
+import com.example.weatherapp.model.AlertDao
+import com.example.weatherapp.model.AlertModel
 import com.example.weatherapp.model.Favourite
 
-class ConcreteLocalSource private constructor(context: Context): LocalInterface {
+class ConcreteLocalSource  constructor(context: Context): LocalInterface {
 
     companion object{
         @Volatile
@@ -23,6 +25,11 @@ class ConcreteLocalSource private constructor(context: Context): LocalInterface 
         val db:RoomDB= RoomDB.getInstance(context)
         db.getWeathersDao()
     }
+    private val daoAlert: AlertDao by lazy {
+
+        val db:RoomDB= RoomDB.getInstance(context)
+        db.getAlertDao()
+    }
 
     override suspend fun insertToFavorite(fav: Favourite) {
         dao.insertToFavorite(fav)
@@ -34,5 +41,17 @@ class ConcreteLocalSource private constructor(context: Context): LocalInterface 
 
     override suspend fun getFavorites(): List<Favourite> {
        return dao.getFavorites()
+    }
+
+    override suspend fun getAlert(): List<AlertModel> {
+        return daoAlert.getAlert()
+    }
+
+    override suspend fun insertToAlert(alert: AlertModel) {
+        return daoAlert.insertToAlert(alert)
+    }
+
+    override suspend fun deleteFromAlert(alert: AlertModel): Int {
+        return daoAlert.deleteFromAlert(alert)
     }
 }

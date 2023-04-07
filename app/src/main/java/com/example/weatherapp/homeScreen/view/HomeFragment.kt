@@ -22,6 +22,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherapp.Constant
@@ -42,7 +43,7 @@ import java.util.*
 
 
 class HomeFragment : Fragment() {
-
+val args:HomeFragmentArgs by navArgs()
     lateinit var myViewModel: HomeViewModel
     lateinit var myViewModelFactory: HomeViewModelFactory
     lateinit var progressDialog: DialogFragment
@@ -63,8 +64,7 @@ class HomeFragment : Fragment() {
     ): View {
 //Location Gps
         geocoder = Geocoder(requireActivity(), Locale.getDefault())
-        fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        getLastLocation()
+//        getLastLocation()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -82,8 +82,8 @@ class HomeFragment : Fragment() {
          }
          }
 
-            _binding!!.countryTxt?.text = adress?.get(0)?.getAddressLine(0)!!.split(",")[1]
-//            _binding?.countryTxt?.text = it.timezone
+//            _binding!!.countryTxt?.text = adress?.get(0)?.getAddressLine(0)!!.split(",")[1]
+            _binding?.countryTxt?.text = it.timezone
             _binding?.CelsusTxt?.text = it.current?.temp.toString() + Constant.CELSIUS
             val dayhome= it.current?.dt?.let { it1 -> getCurrentDay(it1.toInt()) }
             _binding?.homeDecs?.text = it.current?.weather?.get(0)?.description
@@ -198,7 +198,12 @@ class HomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        getLastLocation()
+        if (args!=null){
+            myViewModel.getWeatherDetails(args.lat.toDouble(),args.long.toDouble(),"exclude",Constant.appId)
+        }else {
+            fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+            getLastLocation()
+        }
     }
 
     @SuppressLint("MissingPermission")

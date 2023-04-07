@@ -60,9 +60,13 @@
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/alertFragment"
-        android:name="com.example.weatherapp.gpsMapDialog.AlertFragment"
+        android:name="com.example.weatherapp.alertScreen.view.AlertFragment"
         android:label="fragment_alert"
-        tools:layout="@layout/fragment_alert" />
+        tools:layout="@layout/fragment_alert" >
+        <action
+            android:id="@+id/action_alertFragment_to_alarmFragment"
+            app:destination="@id/alarmFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/alertDialogFragment"
@@ -78,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.weatherapp.MapsFragment"
+        android:name="com.example.weatherapp.mapScreen.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
         <action
@@ -87,10 +91,19 @@
         <action
             android:id="@+id/action_mapsFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <argument
+            android:name="from"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.weatherapp.splashScreen.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
+    <fragment
+        android:id="@+id/alarmFragment"
+        android:name="com.example.weatherapp.alertScreen.view.AlarmFragment"
+        android:label="fragment_alarm"
+        tools:layout="@layout/fragment_alarm" />
 </navigation>

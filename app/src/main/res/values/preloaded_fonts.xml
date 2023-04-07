@@ -3,5 +3,6 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/almendra</item>
         <item>@font/almendra_italic</item>
+        <item>@font/amaranth_bold_italic</item>
     </array>
 </resources>

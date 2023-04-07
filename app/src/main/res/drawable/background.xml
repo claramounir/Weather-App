@@ -10,7 +10,7 @@
         android:height="10dp"
         />
     <solid
-        android:color="@color/dark_blue"
+        android:color="@color/baby_purple"
         />
 
 
