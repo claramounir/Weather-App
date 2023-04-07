@@ -26,4 +26,5 @@
     <string name="notification">Weather App</string>
     <string name="Alert">Alert</string>
     <string name="From_txt">From</string>
+    <string name="unit_txt">Unit</string>
 </resources>

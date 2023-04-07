@@ -1,5 +1,6 @@
 package com.example.weatherapp
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -172,6 +173,7 @@ object Utils {
     fun generateRandomNumber():Int{
         return nextInt()
     }
+    @SuppressLint("SuspiciousIndentation")
     fun progressDialog(context: Context): ProgressDialog {
       var progressDialog = ProgressDialog(context)
         progressDialog.setTitle("Please Wait")

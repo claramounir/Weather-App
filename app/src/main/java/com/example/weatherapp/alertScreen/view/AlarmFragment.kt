@@ -35,62 +35,63 @@ private const val TAGA = "AlarmFragment"
 
 class AlarmFragment : Fragment() {
 
-    private lateinit var _binding: FragmentAlarmBinding
-    private val binding get() = _binding!!
-    lateinit var timePicker: TimePicker
-    lateinit var timePickerDialog: TimePickerDialog
-    lateinit var calendarStart: Calendar
-    lateinit var calenderEnd: Calendar
+//    private lateinit var _binding: FragmentAlarmBinding
+//    private val binding get() = _binding!!
+//    lateinit var timePicker: TimePicker
+//    lateinit var timePickerDialog: TimePickerDialog
+//    lateinit var calendarStart: Calendar
+//    lateinit var calenderEnd: Calendar
+//
+//    val RQS_1 = 1
+//
+//    companion object {
+//        const val TAG = "AlarmFragment"
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+////        val window: Window? = dialog!!.window
+////        window?.setBackgroundDrawableResource(android.R.color.transparent)
+//    }
 
-    val RQS_1 = 1
-
-    companion object {
-        const val TAG = "AlarmFragment"
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val window: Window? = dialog!!.window
-        window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
-
-    @SuppressLint("IdleBatteryChargingConstraints")
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentAlarmBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-//        getDialog()?.requestWindowFeature(DialogFragment.STYLE_NO_TITLE)
-//        setCancelable(false)
-//        SharedManger.init(requireContext())
-//        var repository =
-//            Repository.getInstance(LocalDataSource(requireContext()), RemoteDataSource())
-        var repository= Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource.getInstance(requireContext()))
-
-        val notificationsViewModel =
-            ViewModelProvider(this, AlertViewModelFactory(repository)).get(
-                AlertViewModel::class.java
-            )
-        var alertSettings = notificationsViewModel.getAlertSettings()
-        calendarStart = Calendar.getInstance()
-        calenderEnd = Calendar.getInstance()
-        binding.tvFromDate.text = getCurrentDate()
-        binding.tvToDate.text = getCurrentDate()
-        binding.tvFromTimePicker.text = getCurrentTime()
-        binding.tvToTimePicker.text = getCurrentTime()
-        if (Utils.isOnline(requireContext())) {
-            binding.btnMap.isEnabled = true
-            binding.btnSet.isEnabled = true
-        }
-    }
-
+//    @SuppressLint("IdleBatteryChargingConstraints")
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//    }
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        // Inflate the layout for this fragment
+//        _binding = FragmentAlarmBinding.inflate(inflater, container, false)
+//        val root: View = binding.root
+//
+////        getDialog()?.requestWindowFeature(DialogFragment.STYLE_NO_TITLE)
+////        setCancelable(false)
+////        SharedManger.init(requireContext())
+////        var repository =
+////            Repository.getInstance(LocalDataSource(requireContext()), RemoteDataSource())
+//        var repository= Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource.getInstance(requireContext()))
+//
+//        val notificationsViewModel =
+//            ViewModelProvider(this, AlertViewModelFactory(repository)).get(
+//                AlertViewModel::class.java
+//            )
+////        var alertSettings = notificationsViewModel.getAlertSettings()
+//        calendarStart = Calendar.getInstance()
+//        calenderEnd = Calendar.getInstance()
+//        binding.tvFromDate.text = getCurrentDate()
+//        binding.tvToDate.text = getCurrentDate()
+//        binding.tvFromTimePicker.text = getCurrentTime()
+//        binding.tvToTimePicker.text = getCurrentTime()
+//        if (Utils.isOnline(requireContext())) {
+//            binding.btnMap.isEnabled = true
+//            binding.btnSet.isEnabled = true
+//        }
+//        return
+//    }
+//
 }
