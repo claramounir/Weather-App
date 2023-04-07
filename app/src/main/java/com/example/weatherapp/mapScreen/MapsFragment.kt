@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.mapScreen
 
 import android.location.Address
 import android.location.Geocoder
@@ -11,12 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.weatherapp.MainActivity
+import com.example.weatherapp.R
 import com.example.weatherapp.data.local.ConcreteLocalSource
 import com.example.weatherapp.data.network.ApiResponse
 import com.example.weatherapp.databinding.FragmentMapsBinding
-import com.example.weatherapp.favoriteScreen.view.FavoriteFragmentDirections
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModel
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModelFactory
 import com.example.weatherapp.homeScreen.viewModel.HomeViewModel
@@ -34,7 +34,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlin.properties.Delegates
 
 class MapsFragment : Fragment() {
 lateinit var binding: FragmentMapsBinding

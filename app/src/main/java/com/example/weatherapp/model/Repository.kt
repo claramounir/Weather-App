@@ -40,6 +40,19 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
 
     }
 
+    override suspend fun getAlert(): List<AlertModel> {
+        return localSource.getAlert()
+    }
+
+    override suspend fun insertToAlert(alert: AlertModel) {
+        localSource.insertToAlert(alert)
+    }
+
+    override suspend fun deleteFromAlert(alert: AlertModel) {
+        localSource.deleteFromAlert(alert)
+
+    }
+
     override suspend fun getWeatherFromApi(
         lat: Double,
         lon: Double,

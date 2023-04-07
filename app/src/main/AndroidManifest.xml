@@ -30,7 +30,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".alertScreen.view.NotificationActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -55,6 +57,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".alertScreen.AlarmReceiver" />
 
         <meta-data
             android:name="preloaded_fonts"

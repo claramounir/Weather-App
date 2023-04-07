@@ -3,19 +3,11 @@ package com.example.weatherapp
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.favoriteScreen.view.FavoriteFragment
-import com.example.weatherapp.gpsMapDialog.AlertFragment
-import com.example.weatherapp.homeScreen.view.HomeFragment
-import com.example.weatherapp.setting.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

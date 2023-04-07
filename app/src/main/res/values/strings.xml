@@ -20,4 +20,10 @@
     <string name="location_txt">Location</string>
     <string name="Tempreture" />
     <string name="project_name">WEZZARO</string>
+    <string name="alarm_btn">SET ALARM</string>
+    <string name="cancel_alarm_btn">CANCEL ALARM</string>
+    <string name="colon">:</string>
+    <string name="notification">Weather App</string>
+    <string name="Alert">Alert</string>
+    <string name="From_txt">From</string>
 </resources>

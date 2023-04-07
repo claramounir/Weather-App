@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.weatherapp.model.AlertDao
 import com.example.weatherapp.model.AlertModel
 import com.example.weatherapp.model.Favourite
 
@@ -14,6 +15,7 @@ import com.example.weatherapp.model.Favourite
 
 abstract class RoomDB : RoomDatabase() {
     abstract fun getWeathersDao(): FavouriteDao
+    abstract fun getAlertDao(): AlertDao
     companion object{
         @Volatile
         private var INSTANCE: RoomDB? = null
