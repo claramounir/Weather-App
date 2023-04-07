@@ -40,7 +40,7 @@ class FavoriteAdapter(private var list:List<Favourite>, val onClick:OnFavClickLi
         val lon = myObj.longitude
 
         holder.binding.countryNameFav.text = myObj.city
-        holder.binding.countryTemp.text = myObj.city
+//        holder.binding.countryTemp.text = myObj.
         holder.binding.deleteBtn.setOnClickListener {
                 onClick.deleteWeather(myObj)
             notifyDataSetChanged()

@@ -5,6 +5,7 @@ import android.location.Geocoder
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
 import com.example.weatherapp.data.local.ConcreteLocalSource
@@ -36,12 +38,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
+    val args:MapsFragmentArgs by navArgs()
 lateinit var binding: FragmentMapsBinding
 lateinit var fusedClient:FusedLocationProviderClient
 lateinit var mapFragment: SupportMapFragment
 lateinit var mMap: GoogleMap
-      lateinit var lat: String
-    lateinit var long: String
+var lat:Double = 0.0
+  var long :Double = 0.0
     lateinit var mainActivity: MainActivity
     lateinit var homeViewModel: HomeViewModel
     lateinit var homeViewModelFactory: HomeViewModelFactory
@@ -53,8 +56,8 @@ lateinit var mMap: GoogleMap
         mMap.setOnMapClickListener {
             mMap.clear()
             mMap.addMarker(MarkerOptions().position(it))
-            lat =it.latitude.toString()
-            long=it.longitude.toString()
+            lat =it.latitude
+            long=it.longitude
             goToLatLng(it.latitude,it.longitude,16f)
         }
 
@@ -80,17 +83,34 @@ lateinit var mMap: GoogleMap
         mapFragment.getMapAsync(callback)
         mapInitialize()
         binding.saveBtn.setOnClickListener{
-            homeViewModel.getWeatherDetails(lat.toDouble(),long.toDouble(),"exclude","a62af663ada4f8dbf13318c557451a3b")
-            homeViewModel.weatherDetails.observe(viewLifecycleOwner){
+            Log.i("claramap","clara"+lat.toString()+long.toString())
+            if (lat != null && long != null) {
+            if (args.from == 1) {
 
-                    fav.latitude = it.lat!!
-                    fav.longitude = it.lon!!
-                    fav.city = it.timezone
+                    homeViewModel.getWeatherDetails(
+                        lat.toDouble(),
+                        long.toDouble(),
+                        "exclude",
+                        "a62af663ada4f8dbf13318c557451a3b"
+                    )
+                    homeViewModel.weatherDetails.observe(viewLifecycleOwner) {
 
-                    favoriteViewModel.insertFavWeather(fav)
-                    val action = MapsFragmentDirections.actionMapsFragmentToFavoriteFragment()
+                        fav.latitude = it.lat!!
+                        fav.longitude = it.lon!!
+                        fav.city = it.timezone
+
+                        Log.i("claramap","clara"+it.timezone)
+                        favoriteViewModel.insertFavWeather(fav)
+                        val action = MapsFragmentDirections.actionMapsFragmentToFavoriteFragment()
+                        Navigation.findNavController(requireView()).navigate(action)
+                    }
+                } else {
+                    val action = MapsFragmentDirections.actionMapsFragmentToHomeFragment(
+                        lat.toFloat(),
+                        long.toFloat()
+                    )
                     Navigation.findNavController(requireView()).navigate(action)
-
+                }
             }
         }
         return binding.root
@@ -132,8 +152,8 @@ private fun goToSearchLocation(){
     if (list!= null && list.size>0){
 
         var address: Address = list.get(0)
-        lat =address.latitude.toString()
-        long=address.longitude.toString()
+        lat =address.latitude
+        long=address.longitude
         goToLatLng(address.latitude,address.longitude,16f)
     }
 
