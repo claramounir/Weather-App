@@ -1,5 +1,6 @@
 package com.example.weatherapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherforecast.model.SharedPrefrences.SharedManger
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -36,6 +38,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun attachBaseContext(newBase: Context?) {
 
+        SharedManger.init(newBase!!)
+        if(SharedManger.getSettings()?.lang.equals(Constant.LANG_AR))
+        {
+            val lang_code = "ar" //load it from SharedPref
+            val context: Context = Utils.changeLang(newBase!!, lang_code)!!
+
+        }
+        else
+        {
+            val lang_code = "en" //load it from SharedPref
+            val context: Context = Utils.changeLang(newBase!!, lang_code)!!
+
+        }
+
+        super.attachBaseContext(newBase)
+    }
 
 }
