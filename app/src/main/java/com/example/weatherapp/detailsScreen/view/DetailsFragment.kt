@@ -14,6 +14,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherapp.Constant
@@ -25,6 +26,7 @@ import com.example.weatherapp.databinding.FragmentDetailsBinding
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.detailsScreen.viewModel.DetailsViewModelFactory
 import com.example.weatherapp.homeScreen.view.DayAdapter
+import com.example.weatherapp.homeScreen.view.HomeFragmentArgs
 import com.example.weatherapp.homeScreen.view.HourAdapter
 import com.example.weatherapp.homeScreen.viewModel.HomeViewModel
 import com.example.weatherapp.homeScreen.viewModel.HomeViewModelFactory
@@ -42,6 +44,7 @@ import java.util.*
 
 
 class DetailsFragment : Fragment() {
+    val args: DetailsFragmentArgs by navArgs()
 
     lateinit var myViewModel: HomeViewModel
     lateinit var myViewModelFactory: DetailsViewModelFactory
@@ -176,19 +179,18 @@ class DetailsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_details, container, false)
-//    }
+    @SuppressLint("SuspiciousIndentation")
+    override fun onResume() {
+        super.onResume()
+         (args.latitude.equals(0) && args.longtitue.equals(0))
+            fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+            Toast.makeText(context, "clara zh2t", Toast.LENGTH_SHORT).show()
+
+        myViewModel.getWeatherDetails(args.latitude.toDouble(),args.longtitue.toDouble(),"exclude",Constant.appId)
+
+
+
+    }
 
 
 }

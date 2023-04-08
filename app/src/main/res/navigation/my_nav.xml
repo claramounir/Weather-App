@@ -93,10 +93,14 @@
         tools:layout="@layout/fragment_maps" >
         <action
             android:id="@+id/action_mapsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/mapsFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mapsFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteFragment"
+            app:popUpTo="@id/mapsFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="from"
             app:argType="integer"

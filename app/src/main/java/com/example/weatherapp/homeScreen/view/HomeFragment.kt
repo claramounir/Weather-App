@@ -244,7 +244,10 @@ val args:HomeFragmentArgs by navArgs()
         super.onResume()
         if (args.lat.equals(0) && args.long.equals(0)){
             fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+            Toast.makeText(context, "clara zh2t", Toast.LENGTH_SHORT).show()
             getLastLocation()
+
+
         }else {
 
             myViewModel.getWeatherDetails(args.lat.toDouble(),args.long.toDouble(),"exclude",Constant.appId)
