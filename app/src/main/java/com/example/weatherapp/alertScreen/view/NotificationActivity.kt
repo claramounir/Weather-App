@@ -9,7 +9,7 @@ import com.example.weatherapp.alertScreen.viewModel.NotificationClass
 import com.example.weatherapp.databinding.ActivityNotificationBinding
 
 class NotificationActivity : AppCompatActivity() {
-    var clara=com.example.weatherapp.alertScreen.AlarmReceiver.alarm
+    var clara=com.example.weatherapp.alertScreen.AlarmReceiver.r
 
     private var _binding: ActivityNotificationBinding? = null
     private val binding get() = _binding
