@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.work.*
+
 import com.example.weatherapp.Constant
 import com.example.weatherapp.Constant.Alert
 import com.example.weatherapp.R
@@ -50,12 +51,12 @@ private const val TAGA = "AlarmFragment"
 class AlarmFragment : Fragment() {
 
     private lateinit var _binding: FragmentAlarmBinding
-    private val binding get() = _binding!!
     lateinit var timePicker: TimePicker
     lateinit var timePickerDialog: TimePickerDialog
     lateinit var calendarStart: Calendar
     lateinit var calenderEnd: Calendar
     lateinit var myViewModel: AlertViewModel
+private lateinit var binding :FragmentAlarmBinding
 
     val RQS_1 = 1
 
@@ -82,6 +83,7 @@ class AlarmFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentAlarmBinding.inflate(inflater, container, false)
+        binding = _binding
         val root: View = binding.root
 
 
@@ -180,7 +182,7 @@ class AlarmFragment : Fragment() {
                 Log.e(TAGA, "onCreateView: " + myViewModel.getAlertSettings().toString())
 
                 val inputData = Data.Builder()
-                inputData.putString(Constant.Alert, Gson().toJson(alert).toString())
+                inputData.putString("Alert", Gson().toJson(alert).toString())
 
                 // Create a Constraints that defines when the task should run
                 val myConstraints: Constraints = Constraints.Builder()

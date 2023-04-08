@@ -13,6 +13,7 @@ import android.os.Build
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.work.WorkManager
 import com.example.weatherapp.Constant
 import com.example.weatherapp.Utils
@@ -40,6 +41,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onReceive(context: Context, intent: Intent) {
         sharedPreferences = context.getSharedPreferences("shared", MODE_PRIVATE)
         val repo = Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource(context))
@@ -50,9 +52,10 @@ class AlarmReceiver : BroadcastReceiver() {
         val notification = NotificationClass(context)
         notificationId = 1
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            notificationManager = notification.alarmNotificationManager(context)
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//
+//        }
+        notificationManager = notification.alarmNotificationManager(context)
 
 
         Log.e("onReceive", "koki")

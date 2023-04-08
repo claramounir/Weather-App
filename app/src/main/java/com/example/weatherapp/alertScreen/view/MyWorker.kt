@@ -64,7 +64,7 @@ class MyWorker(appContext: Context, workerParams: WorkerParameters) :
         alarmIntent = Intent(applicationContext, AlarmReceiver::class.java).putExtra(Constant.Alert,alert).let { intent ->
             PendingIntent.getBroadcast(applicationContext, requestCode, intent, FLAG_IMMUTABLE)
         }
-        alarmMgr?.setExactAndAllowWhileIdle(
+        alarmMgr?.setExact(
             AlarmManager.RTC_WAKEUP,
             dateInMillis,
             alarmIntent

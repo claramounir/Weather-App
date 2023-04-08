@@ -20,7 +20,7 @@ init {
    getAlert()
 }
 
-    private fun getAlert() {
+    fun getAlert() {
         viewModelScope.launch(Dispatchers.IO){
             _alert.postValue(repo.getAlert())
         }

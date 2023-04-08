@@ -28,4 +28,8 @@
     <string name="From_txt">From</string>
     <string name="unit_txt">Unit</string>
     <string name="save_btn">Save</string>
+    <string name="cancel">cancel</string>
+    <string name="need_permission">You need permission</string>
+    <string name="want_app_to_access_alerts">Alert</string>
+    <string name="ok">OK</string>
 </resources>
