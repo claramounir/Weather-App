@@ -1,5 +1,6 @@
 package com.example.weatherapp.model
 
+import com.example.weatherapp.Constant
 import com.google.gson.annotations.SerializedName
 import java.util.*
 import kotlin.collections.ArrayList
@@ -115,22 +116,17 @@ data class WeatherResponse(
 
 )
 
+data class Settings(
+    var lang:String= Constant.LANG_EN,
+     var isMap:Boolean=false,
+     var unit:String=Constant.UNITS_DEFAULT,
+     var lat:Double=0.0,
+     var lon:Double=0.0)
 
 
-//enum class Units(var unit: String) {
-//    IMPERIAL("imperial"),
-//    METRIC("metric"),
-//    STANDARD("standard")
-//
-//}
-//
-//enum class Languages(var language: String) {
-//    ENGLISH("en"),
-//    ARABIC("ar")
-//}
-//
-//enum class Location(var location: String) {
-//    MAP("MAP"),
-//    GPS("GPS")
-//
-//}
+data class AlertSettings (
+    var lat:Double=36.4761,
+    var lon:Double=-119.4432,
+    var isALarm:Boolean=true,
+    var isNotification:Boolean=false
+)

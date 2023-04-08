@@ -11,7 +11,7 @@ import com.example.weatherapp.model.Favourite
 //class RoomDB {
 //}
 
-@Database(entities = arrayOf(Favourite::class, AlertModel::class), version = 4 )
+@Database(entities = arrayOf(Favourite::class, AlertModel::class), version = 5 )
 
 abstract class RoomDB : RoomDatabase() {
     abstract fun getWeathersDao(): FavouriteDao

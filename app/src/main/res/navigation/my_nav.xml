@@ -55,9 +55,15 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.weatherapp.setting.SettingFragment"
+        android:name="com.example.weatherapp.setting.view.SettingFragment"
         android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment"
+            app:popUpTo="@id/settingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/alertFragment"
         android:name="com.example.weatherapp.alertScreen.view.AlertFragment"
@@ -95,6 +101,12 @@
             android:name="from"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="isSetting"
+            app:argType="boolean" />
+        <argument
+            android:name="isAlert"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

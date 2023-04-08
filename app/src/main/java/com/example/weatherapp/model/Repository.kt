@@ -3,6 +3,7 @@ package com.example.weatherapp.model
 
 import com.example.weatherapp.data.local.LocalInterface
 import com.example.weatherapp.data.network.ApiResponse
+import com.example.weatherforecast.model.SharedPrefrences.SharedManger
 import retrofit2.Response
 
 
@@ -60,10 +61,29 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
         appid: String
     ): Response<WeatherResponse> {
         val response = remote.getWeatherFromApi(lat, lon, exclude, appid)
-        if (response.isSuccessful == true) {
-            response!!.also { myResponse = it }
+        if (response != null) {
+            if (response.isSuccessful == true) {
+                response!!.also { myResponse = it }
+            }
         }
         return myResponse
+    }
+
+    override fun saveSettings(settings: Settings) {
+        SharedManger.saveSettings(settings)
+    }
+
+    override fun getSettings(): Settings? {
+        return SharedManger.getSettings()
+
+    }
+
+    override fun saveAlertSettings(alertSettings: AlertSettings) {
+        SharedManger.saveAlertSettings(alertSettings)
+    }
+
+    override fun getAlertSettings(): AlertSettings? {
+        return SharedManger.getAlertSettings()
     }
 
 

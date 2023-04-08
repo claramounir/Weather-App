@@ -12,4 +12,10 @@ interface RepositoryInterface {
     suspend fun deleteFromAlert(alert: AlertModel)
     suspend fun getWeatherFromApi(lat:Double,lon:Double,exclude:String,appid:String): Response<WeatherResponse>
 
+
+    fun saveSettings(settings: Settings)
+    fun getSettings(): Settings?
+    fun saveAlertSettings(alertSettings: AlertSettings)
+    fun getAlertSettings(): AlertSettings?
+
 }
