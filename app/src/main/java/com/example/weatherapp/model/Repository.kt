@@ -1,25 +1,31 @@
 package com.example.weatherapp.model
 
 
+import com.example.weatherapp.Constant
 import com.example.weatherapp.data.local.LocalInterface
 import com.example.weatherapp.data.network.ApiResponse
 import com.example.weatherforecast.model.SharedPrefrences.SharedManger
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 
 
-class Repository (  private var remote: ApiResponse,var localSource: LocalInterface ) :RepositoryInterface{
+class Repository (  private var remote: ApiResponse,var localSource: LocalInterface ) :RepositoryInterface {
 
     lateinit var myResponse: Response<WeatherResponse>
-    companion object{
-        private var instance:Repository?=null
-        fun getInstance( remote: ApiResponse,localSource: LocalInterface ):Repository{
 
-            return instance?: synchronized(this){
-                val temp =Repository(
-                 remote , localSource
+    companion object {
+        private var instance: Repository? = null
+        fun getInstance(remote: ApiResponse, localSource: LocalInterface): Repository {
+
+            return instance ?: synchronized(this) {
+                val temp = Repository(
+                    remote, localSource
 //                    roomDB
                 )
-                instance=temp
+                instance = temp
                 temp
             }
         }
@@ -28,8 +34,8 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
     // functions from fav dao
 
 
-    override suspend fun  insertToFavorite(fav: Favourite) {
-      localSource.insertToFavorite(fav)
+    override suspend fun insertToFavorite(fav: Favourite) {
+        localSource.insertToFavorite(fav)
     }
 
     override suspend fun deleteFromFavorite(fav: Favourite) {
@@ -59,15 +65,16 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
         lon: Double,
         exclude: String,
         appid: String
-    ): Response<WeatherResponse> {
-        val response = remote.getWeatherFromApi(lat, lon, exclude, appid)
-        if (response != null) {
-            if (response.isSuccessful == true) {
-                response!!.also { myResponse = it }
-            }
-        }
-        return myResponse
+    ): Flow<Response<WeatherResponse>?> = flow {
+        emit(remote.getWeatherFromApi(lat, lon, "", Constant.appId))
+
     }
+        .flowOn(Dispatchers.IO)
+
+
+
+
+
 
     override fun saveSettings(settings: Settings) {
         SharedManger.saveSettings(settings)
