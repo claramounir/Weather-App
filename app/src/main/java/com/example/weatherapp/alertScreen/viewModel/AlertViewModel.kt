@@ -33,10 +33,22 @@ init {
     }
    }
     fun insertAlert(alert: AlertModel){
+
         viewModelScope.launch(Dispatchers.IO){
             repo.insertToAlert(alert)
             getAlert()
         }
     }
 
-  }
+
+    fun getAlertSettings(): AlertSettings?{
+        return repo.getAlertSettings()
+    }
+    fun saveAlertSettings(alertSettings: AlertSettings){
+        repo.saveAlertSettings(alertSettings)
+    }
+
+
+}
+
+

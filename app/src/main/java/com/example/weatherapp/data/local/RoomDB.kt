@@ -11,7 +11,7 @@ import com.example.weatherapp.model.Favourite
 //class RoomDB {
 //}
 
-@Database(entities = arrayOf(Favourite::class, AlertModel::class), version = 5 )
+@Database(entities = arrayOf(Favourite::class, AlertModel::class), version = 6 )
 
 abstract class RoomDB : RoomDatabase() {
     abstract fun getWeathersDao(): FavouriteDao
@@ -22,7 +22,10 @@ abstract class RoomDB : RoomDatabase() {
         fun getInstance (ctx: Context): RoomDB{
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
+
                     ctx.applicationContext, RoomDB::class.java, "favname3")
+                    .fallbackToDestructiveMigration()
+
                     .build()
                 INSTANCE = instance
                 instance }

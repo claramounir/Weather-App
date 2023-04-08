@@ -11,13 +11,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
 import com.example.weatherapp.data.local.ConcreteLocalSource
 import com.example.weatherapp.data.network.ApiResponse
+import com.example.weatherapp.data.network.ApiState
 import com.example.weatherapp.databinding.FragmentMapsBinding
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModel
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModelFactory
@@ -36,6 +39,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MapsFragment : Fragment() {
     val args:MapsFragmentArgs by navArgs()
@@ -93,26 +98,42 @@ var lat:Double = 0.0
                         "exclude",
                         "a62af663ada4f8dbf13318c557451a3b"
                     )
-                    homeViewModel.weatherDetails.observe(viewLifecycleOwner) {
+                lifecycleScope.launch {
+                    homeViewModel.weatherDetails.collectLatest {
+                        when (it) {
+                            is ApiState.Success -> {
 
-                        fav.latitude = it.lat!!
-                        fav.longitude = it.lon!!
-                        fav.city = it.timezone
 
-                        Log.i("claramap","clara"+it.timezone)
-                        favoriteViewModel.insertFavWeather(fav)
-                        val action = MapsFragmentDirections.actionMapsFragmentToFavoriteFragment()
-                        Navigation.findNavController(requireView()).navigate(action)
+                                fav.latitude = it.data.body()?.lat!!
+                                fav.longitude = it.data.body()!!.lon!!
+                                fav.city = it.data.body()!!.timezone
+
+
+                                Log.i("claramap", "clara" + it.data.body()!!.timezone)
+                                favoriteViewModel.insertFavWeather(fav)
+                                val action =
+                                    MapsFragmentDirections.actionMapsFragmentToFavoriteFragment()
+                                Navigation.findNavController(requireView()).navigate(action)
+                            }
+                            else -> {
+                                Toast.makeText(context, "Check your connection", Toast.LENGTH_SHORT).show()
+
+                            }
+                        }
+
                     }
-                } else {
-                    val action = MapsFragmentDirections.actionMapsFragmentToHomeFragment(
-                        lat.toFloat(),
-                        long.toFloat()
-                    )
-                    Navigation.findNavController(requireView()).navigate(action)
+                    }
+                }
+            else {
+                val action = MapsFragmentDirections.actionMapsFragmentToHomeFragment(
+                    lat.toFloat(),
+                    long.toFloat()
+                )
+                Navigation.findNavController(requireView()).navigate(action)
+            }
                 }
             }
-        }
+
         return binding.root
     }
 
