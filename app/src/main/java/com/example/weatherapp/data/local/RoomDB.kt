@@ -7,7 +7,7 @@ import com.example.weatherapp.model.*
 //class RoomDB {
 //}
 
-@Database(entities = arrayOf(Favourite::class, AlertModel::class,WeatherResponse::class ), version = 6 )
+@Database(entities = arrayOf(Favourite::class, AlertModel::class,WeatherResponse::class ), version = 7 )
 @TypeConverters(Converter::class)
 abstract class RoomDB : RoomDatabase() {
     abstract fun getWeathersDao(): FavouriteDao
