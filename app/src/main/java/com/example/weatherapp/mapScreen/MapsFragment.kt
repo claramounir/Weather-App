@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
@@ -39,8 +40,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MapsFragment : Fragment() {
     val args:MapsFragmentArgs by navArgs()
@@ -88,7 +91,6 @@ var lat:Double = 0.0
         mapFragment.getMapAsync(callback)
         mapInitialize()
         binding.saveBtn.setOnClickListener{
-            Log.i("claramap","clara"+lat.toString()+long.toString())
             if (lat != null && long != null) {
             if (args.from == 1) {
 
@@ -102,6 +104,7 @@ var lat:Double = 0.0
                     homeViewModel.weatherDetails.collectLatest {
                         when (it) {
                             is ApiState.Success -> {
+                                Log.i("claramap","clara"+lat.toString()+long.toString())
 
 
                                 fav.latitude = it.data.body()?.lat!!
@@ -109,11 +112,14 @@ var lat:Double = 0.0
                                 fav.city = it.data.body()!!.timezone
 
 
-                                Log.i("claramap", "clara" + it.data.body()!!.timezone)
+                                Log.i("cocimap", "clara" + it.data.body()!!.lat+ it.data.body()!!.lon)
                                 favoriteViewModel.insertFavWeather(fav)
                                 val action =
                                     MapsFragmentDirections.actionMapsFragmentToFavoriteFragment()
                                 Navigation.findNavController(requireView()).navigate(action)
+
+
+
                             }
                             else -> {
                                 Toast.makeText(context, "Check your connection", Toast.LENGTH_SHORT).show()
