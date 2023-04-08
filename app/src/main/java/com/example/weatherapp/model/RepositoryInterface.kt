@@ -18,4 +18,8 @@ interface RepositoryInterface {
     fun saveAlertSettings(alertSettings: AlertSettings)
     fun getAlertSettings(): AlertSettings?
 
+    suspend fun getHome(): WeatherResponse
+    suspend fun insertToHome(home: WeatherResponse)
+    suspend fun deleteFromHome(): Int
+
 }

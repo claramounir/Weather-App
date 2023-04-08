@@ -39,4 +39,23 @@ class HomeViewModel(private val repo: RepositoryInterface) : ViewModel() {
         }
 
     }
+
+     fun getHome(){
+        viewModelScope.launch(Dispatchers.IO){
+            _weatherDetails.postValue(repo.getHome())
+        }
+    }
+
+    fun deleteHome(){
+        viewModelScope.launch(Dispatchers.IO){
+            repo.deleteFromHome()
+            getHome()
+        }
+    }
+    fun insertHome(home: WeatherResponse ){
+        viewModelScope.launch(Dispatchers.IO){
+           repo.insertToHome(home)
+            getHome()
+        }
+    }
 }

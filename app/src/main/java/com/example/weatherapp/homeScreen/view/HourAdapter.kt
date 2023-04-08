@@ -10,12 +10,13 @@ import com.bumptech.glide.Glide
 import com.example.weatherapp.Constant
 import com.example.weatherapp.databinding.RowDaysBinding
 import com.example.weatherapp.databinding.RowTemperatureBinding
+import com.example.weatherapp.model.Current
 
-import com.example.weatherapp.model.Hourly
+
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HourAdapter(var hourly: List<Hourly>) : RecyclerView.Adapter<HourAdapter.ViewHolder>(){
+class HourAdapter(var hourly: List<Current>) : RecyclerView.Adapter<HourAdapter.ViewHolder>(){
 
 
     lateinit var context: Context

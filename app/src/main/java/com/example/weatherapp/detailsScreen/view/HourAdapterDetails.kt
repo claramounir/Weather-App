@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.Constant
 import com.example.weatherapp.databinding.RowTemperatureBinding
-import com.example.weatherapp.model.Hourly
+import com.example.weatherapp.model.Current
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HourAdapterDetails(var hourly: List<Hourly>) : RecyclerView.Adapter<HourAdapterDetails.ViewHolder>(){
+class HourAdapterDetails(var hourly: List<Current>) : RecyclerView.Adapter<HourAdapterDetails.ViewHolder>(){
 
 
     lateinit var context: Context

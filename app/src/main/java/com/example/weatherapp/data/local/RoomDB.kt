@@ -1,21 +1,19 @@
 package com.example.weatherapp.data.local
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.example.weatherapp.model.AlertDao
-import com.example.weatherapp.model.AlertModel
-import com.example.weatherapp.model.Favourite
+import androidx.room.*
+import com.example.weatherapp.model.*
 
 //class RoomDB {
 //}
 
-@Database(entities = arrayOf(Favourite::class, AlertModel::class), version = 5 )
-
+@Database(entities = arrayOf(Favourite::class, AlertModel::class,WeatherResponse::class ), version = 6 )
+@TypeConverters(Converter::class)
 abstract class RoomDB : RoomDatabase() {
     abstract fun getWeathersDao(): FavouriteDao
     abstract fun getAlertDao(): AlertDao
+    abstract fun getHomeDao(): HomeDao
+
     companion object{
         @Volatile
         private var INSTANCE: RoomDB? = null

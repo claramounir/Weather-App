@@ -53,6 +53,17 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
         localSource.deleteFromAlert(alert)
 
     }
+    override suspend fun getHome(): WeatherResponse {
+       return localSource.getHome()
+    }
+
+    override suspend fun insertToHome(home: WeatherResponse) {
+      localSource.insertToHome(home)
+    }
+
+    override suspend fun deleteFromHome(): Int {
+     return   localSource.deleteFromHome()
+    }
 
     override suspend fun getWeatherFromApi(
         lat: Double,
@@ -85,6 +96,8 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
     override fun getAlertSettings(): AlertSettings? {
         return SharedManger.getAlertSettings()
     }
+
+
 
 
 //

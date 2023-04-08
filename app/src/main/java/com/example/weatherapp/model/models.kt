@@ -1,6 +1,7 @@
 package com.example.weatherapp.model
 
 import com.example.weatherapp.Constant
+import com.google.android.filament.Entity
 import com.google.gson.annotations.SerializedName
 import java.util.*
 import kotlin.collections.ArrayList
@@ -12,10 +13,12 @@ data class Weather(
     @SerializedName("main") var main: String? = null,
     @SerializedName("description") var description: String? = null,
     @SerializedName("icon") var icon: String? = null
-)
+){
+    constructor():this(null,null,null,null)
+}
 
 
-data class Current(
+data class Current (
     @SerializedName("dt") var dt: Long,
     @SerializedName("sunrise") var sunrise: Long? = null,
     @SerializedName("sunset") var sunset: Long? = null,
@@ -32,24 +35,26 @@ data class Current(
     @SerializedName("wind_gust") var windGust: Double? = null,
     @SerializedName("weather") var weather: List<Weather> = arrayListOf()
 
-)
+){
+    constructor():this(0L , 0L , 0L ,0.0 ,0.0, 0,0,0.0,0.0,0,0,0.0,0,0.0, listOf() )
+}
 
-data class Hourly(
-    @SerializedName("dt") var dt: Long,
-    @SerializedName("temp") var temp: Double? = null,
-    @SerializedName("feels_like") var feelsLike: Double? = null,
-    @SerializedName("pressure") var pressure: Int? = null,
-    @SerializedName("humidity") var humidity: Int? = null,
-    @SerializedName("dew_point") var dewPoint: Double? = null,
-    @SerializedName("uvi") var uvi: Double? = null,
-    @SerializedName("clouds") var clouds: Int? = null,
-    @SerializedName("visibility") var visibility: Int? = null,
-    @SerializedName("wind_speed") var windSpeed: Double? = null,
-    @SerializedName("wind_deg") var windDeg: Int? = null,
-    @SerializedName("wind_gust") var windGust: Double? = null,
-    @SerializedName("weather") var weather: ArrayList<Weather> = arrayListOf(),
-    @SerializedName("pop") var pop: Double? = null
-)
+//data class Hourly(
+//    @SerializedName("dt") var dt: Long,
+//    @SerializedName("temp") var temp: Double? = null,
+//    @SerializedName("feels_like") var feelsLike: Double? = null,
+//    @SerializedName("pressure") var pressure: Int? = null,
+//    @SerializedName("humidity") var humidity: Int? = null,
+//    @SerializedName("dew_point") var dewPoint: Double? = null,
+//    @SerializedName("uvi") var uvi: Double? = null,
+//    @SerializedName("clouds") var clouds: Int? = null,
+//    @SerializedName("visibility") var visibility: Int? = null,
+//    @SerializedName("wind_speed") var windSpeed: Double? = null,
+//    @SerializedName("wind_deg") var windDeg: Int? = null,
+//    @SerializedName("wind_gust") var windGust: Double? = null,
+//    @SerializedName("weather") var weather: ArrayList<Weather> = arrayListOf(),
+//    @SerializedName("pop") var pop: Double? = null
+//)
 
 data class FeelsLike(
 
@@ -69,7 +74,9 @@ data class Temp(
     @SerializedName("eve") var eve: Double? = null,
     @SerializedName("morn") var morn: Double? = null
 
-)
+){
+    constructor():this(0.0,0.0,0.0,0.0,0.0,0.0)
+}
 
 data class Daily(
 
@@ -101,20 +108,22 @@ data class Alerts(
     @SerializedName("end") var end: Long? = null,
     @SerializedName("description") var description: String? = null,
     @SerializedName("tags") var tags: List<String>
-)
+){
+    constructor():this(null,null,null,null,null, listOf())
+}
 
-data class WeatherResponse(
-    val current: Current ?= null,
-    val daily: List<Daily> = emptyList(),
-    val hourly: List<Hourly> = emptyList(),
-    val lat: Double ?= null,
-    val lon: Double ?= null,
-    val timezone: String ?= null,
-    val timezone_offset: Int ?= null,
-    val alerts: List<Alerts>?=null,
-    val icon: String? = null
-
-)
+//data class WeatherResponse(
+//    val current: Current ?= null,
+//    val daily: List<Daily> = emptyList(),
+//    val hourly: List<Hourly> = emptyList(),
+//    val lat: Double ?= null,
+//    val lon: Double ?= null,
+//    val timezone: String ?= null,
+//    val timezone_offset: Int ?= null,
+//    val alerts: List<Alerts>?=null,
+//    val icon: String? = null
+//
+//)
 
 data class Settings(
     var lang:String= Constant.LANG_EN,
