@@ -1,5 +1,6 @@
 package com.example.weatherapp.alertScreen.view
 
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +8,10 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +24,12 @@ import com.example.weatherapp.data.network.ApiResponse
 import com.example.weatherapp.databinding.FragmentAlertBinding
 import com.example.weatherapp.favoriteScreen.view.FavoriteFragmentDirections
 import com.example.weatherapp.model.AlertModel
+import com.example.weatherapp.model.AlertRoomState
 import com.example.weatherapp.model.Repository
+import com.example.weatherapp.model.RoomState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class AlertFragment : Fragment(),OnAlertClickListener {
@@ -59,13 +66,29 @@ class AlertFragment : Fragment(),OnAlertClickListener {
         checkAlertsPermission()
         myViewModel.getAlert()
         alertAdapter = AlertAdapter(listOf(),this)
+        val progressDialog = ProgressDialog(requireContext())
+
 
         // observation
-        myViewModel.favWeather.observe(viewLifecycleOwner){
-            alertAdapter.setList(it)
-            binding.recyclRv.adapter = alertAdapter
-            binding.recyclRv.layoutManager = LinearLayoutManager(context)
+        lifecycleScope.launch {
+            myViewModel.favWeather.collectLatest{
+                when (it) {
+                    is AlertRoomState.Loading -> {
 
+                        progressDialog.setMessage("loading")
+                        progressDialog.show()
+                    } is AlertRoomState.Success -> {
+                    alertAdapter.setList(it.data)
+                    binding.recyclRv.adapter = alertAdapter
+                    binding.recyclRv.layoutManager = LinearLayoutManager(context)
+                }
+
+                    else -> {
+                        progressDialog.dismiss()
+                        Toast.makeText(context, "Check your connection", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                }
         }
         return myRoot
 
