@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.create
 import kotlin.math.log
 
-class ApiResponse {
+class ApiResponse : GetFromApi{
  var api:ApiInterface = RetrofitInstance.retrofitInstance.create(ApiInterface::class.java)
    companion object {
       private var instance: ApiResponse? = null
@@ -20,7 +20,7 @@ class ApiResponse {
          }
       }
    }
-   suspend fun getWeatherFromApi(lat : Double, long:Double,exclude:String,appid:String ): Response<WeatherResponse>? {
+   override suspend fun getWeatherFromApi(lat : Double, long:Double, exclude:String, appid:String ): Response<WeatherResponse>? {
 var x= SharedManger.getSettings()
     ?.let { SharedManger.getSettings()
         ?.let { it1 -> api.getWeatherDetalis(lat,long, it.lang, it1.unit) } }

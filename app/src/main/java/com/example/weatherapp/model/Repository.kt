@@ -42,12 +42,12 @@ class Repository (  private var remote: ApiResponse,var localSource: LocalInterf
         localSource.deleteFromFavorite(fav)
     }
 
-    override suspend fun getFavorites(): List<Favourite> {
+    override suspend fun getFavorites(): Flow<List<Favourite>> {
         return localSource.getFavorites()
 
     }
 
-    override suspend fun getAlert(): List<AlertModel> {
+    override suspend fun getAlert(): Flow<List<AlertModel>> {
         return localSource.getAlert()
     }
 

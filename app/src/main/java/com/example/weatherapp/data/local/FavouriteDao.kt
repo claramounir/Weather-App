@@ -2,13 +2,14 @@ package com.example.weatherapp.data.local
 
 import androidx.room.*
 import com.example.weatherapp.model.Favourite
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
 interface FavouriteDao {
     @Query("SELECT * FROM favourite_table")
 
-    suspend fun getFavorites(): List<Favourite>
+   fun getFavorites(): Flow<List<Favourite>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertToFavorite(fav: Favourite)

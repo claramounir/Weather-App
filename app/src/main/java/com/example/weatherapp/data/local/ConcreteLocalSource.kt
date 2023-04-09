@@ -5,6 +5,7 @@ import android.content.Context
 import com.example.weatherapp.model.AlertDao
 import com.example.weatherapp.model.AlertModel
 import com.example.weatherapp.model.Favourite
+import kotlinx.coroutines.flow.Flow
 
 class ConcreteLocalSource  constructor(context: Context): LocalInterface {
 
@@ -39,11 +40,11 @@ class ConcreteLocalSource  constructor(context: Context): LocalInterface {
         dao.deleteFromFavorite(fav)
     }
 
-    override suspend fun getFavorites(): List<Favourite> {
+    override suspend fun getFavorites(): Flow<List<Favourite>> {
        return dao.getFavorites()
     }
 
-    override suspend fun getAlert(): List<AlertModel> {
+    override suspend fun getAlert(): Flow<List<AlertModel>> {
         return daoAlert.getAlert()
     }
 

@@ -1,23 +1,30 @@
 package com.example.weatherapp.favoriteScreen.view
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.data.local.ConcreteLocalSource
 import com.example.weatherapp.data.network.ApiResponse
+import com.example.weatherapp.data.network.ApiState
 import com.example.weatherapp.databinding.FragmentFavoriteBinding
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModel
 import com.example.weatherapp.favoriteScreen.viewModel.FavoriteViewModelFactory
 import com.example.weatherapp.model.Favourite
 import com.example.weatherapp.model.Repository
+import com.example.weatherapp.model.RoomState
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class FavoriteFragment : Fragment(),OnFavClickListener {
@@ -50,16 +57,34 @@ private lateinit var binding:FragmentFavoriteBinding
         // viewmodel
         myViewModel = ViewModelProvider(requireActivity(),myViewModelFactory)[FavoriteViewModel::class.java]
         favAdapter = FavoriteAdapter(listOf(),this)
+        val progressDialog = ProgressDialog(requireContext())
 
         // observation
-        myViewModel.favWeather.observe(viewLifecycleOwner){
-            favAdapter.setList(it)
-            Log.i("colerafav", "clara" + it.size)
+        lifecycleScope.launch {
+        myViewModel.favWeather.collectLatest{
 
-            binding.recyclRv.adapter = favAdapter
-            binding.recyclRv.layoutManager = LinearLayoutManager(context)
 
-        }
+            when (it) {
+                is RoomState.Loading -> {
+
+                    progressDialog.setMessage("loading")
+                    progressDialog.show()
+
+
+                } is RoomState.Success -> {
+                favAdapter.setList(it.data)
+                        Log . i ("colerafav", "clara" + it.data.size)
+
+                    binding.recyclRv.adapter = favAdapter
+                binding.recyclRv.layoutManager = LinearLayoutManager(context)
+            }
+                else -> {
+                    progressDialog.dismiss()
+                    Toast.makeText(context, "Check your connection", Toast.LENGTH_SHORT).show()
+                }
+                }
+            }
+            }
         return myRoot
     }
 
