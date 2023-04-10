@@ -168,6 +168,8 @@ private lateinit var binding :FragmentAlarmBinding
                     alertSettings.lon
                 )
             )
+            Log.e("TAG", "clara alert " + myViewModel.getAlertSettings().toString())
+
             if (alert.startTime < alert.endTime) {
                 if (binding.radioButtonAlarm.isChecked) {
                     alertSettings?.isALarm = true

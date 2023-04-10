@@ -58,7 +58,7 @@ class AlertDialogFragment : Fragment() {
 
                 }else{
                     val action=
-                        AlertDialogFragmentDirections.actionAlertDialogFragmentToMapsFragment(false,true,0)
+                        AlertDialogFragmentDirections.actionAlertDialogFragmentToMapsFragment(false,false,0)
                     findNavController().navigate(action)
                 }
                 Toast.makeText(requireActivity(), "$selectedFruits Selected", Toast.LENGTH_SHORT)

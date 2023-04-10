@@ -40,6 +40,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.tabs.TabLayout.TabGravity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -53,6 +54,7 @@ lateinit var mapFragment: SupportMapFragment
 lateinit var mMap: GoogleMap
 var lat:Double = 0.0
   var long :Double = 0.0
+
     lateinit var mainActivity: MainActivity
     lateinit var homeViewModel: HomeViewModel
     lateinit var homeViewModelFactory: HomeViewModelFactory
@@ -66,6 +68,7 @@ var lat:Double = 0.0
             mMap.addMarker(MarkerOptions().position(it))
             lat =it.latitude
             long=it.longitude
+            Log.e("tag",lat.toString()+"coca" +long.toString())
             goToLatLng(it.latitude,it.longitude,16f)
         }
 
@@ -92,7 +95,9 @@ var lat:Double = 0.0
         mapInitialize()
         binding.saveBtn.setOnClickListener{
             if (lat != null && long != null) {
-            if (args.from == 1) {
+                Log.e("tag",lat.toString()+"gwa el if " +long.toString())
+
+                if (args.from == 1) {
 
                     homeViewModel.getWeatherDetails(
                         lat.toDouble(),
@@ -182,6 +187,8 @@ private fun goToSearchLocation(){
         lat =address.latitude
         long=address.longitude
         goToLatLng(address.latitude,address.longitude,16f)
+        Log.e("tag",lat.toString()+"go to search " +long.toString())
+
     }
 
 
