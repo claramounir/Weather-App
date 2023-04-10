@@ -10,12 +10,12 @@ import com.example.weatherapp.Constant
 
 
 class Action : BroadcastReceiver() {
-    lateinit var alarm :Ringtone
+  var alarm :Ringtone ? = null
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onReceive(context: Context, intent: Intent?) {
        val notification = NotificationClass(context)
         if (intent?.action.equals(Constant.ACTION_SNOOZE)){
-            alarm.stop()
+            alarm?.stop()
             notification.alarmNotificationManager(context).cancel(0)
         }
     }

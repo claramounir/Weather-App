@@ -72,11 +72,18 @@ class DetailsFragment : Fragment() {
         binding = _binding as FragmentDetailsBinding
         val root: View = binding.root
 
-            myViewModelFactory = DetailsViewModelFactory(Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource.getInstance(requireContext())))
+        myViewModelFactory = DetailsViewModelFactory(Repository.getInstance(ApiResponse.getINSTANCE(), ConcreteLocalSource.getInstance(requireContext())))
 
 
         myViewModel =
             ViewModelProvider(this.requireActivity(), myViewModelFactory)[HomeViewModel::class.java]
+        (args.latitude.equals(0) && args.longtitue.equals(0))
+        fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        Toast.makeText(context, "clara zh2t", Toast.LENGTH_SHORT).show()
+
+        myViewModel.getWeatherDetails(args.latitude.toDouble(),args.longtitue.toDouble(),"exclude",Constant.appId)
+
+
         val progressDialog = ProgressDialog(requireContext())
 
 //        (myViewModel as HomeViewModel).getWeatherDetails(lat)
@@ -182,12 +189,6 @@ class DetailsFragment : Fragment() {
     @SuppressLint("SuspiciousIndentation")
     override fun onResume() {
         super.onResume()
-         (args.latitude.equals(0) && args.longtitue.equals(0))
-            fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-            Toast.makeText(context, "clara zh2t", Toast.LENGTH_SHORT).show()
-
-        myViewModel.getWeatherDetails(args.latitude.toDouble(),args.longtitue.toDouble(),"exclude",Constant.appId)
-
 
 
     }

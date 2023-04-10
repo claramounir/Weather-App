@@ -39,9 +39,9 @@ import com.example.weatherapp.model.AlertModel
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val myObj = list.get(position)
 
-        holder.binding.from.text = toString()
-        holder.binding.toTxt.text = toString()
-        holder.binding.colonTxt.text = toString()
+        holder.binding.from.text = myObj.startTime.toString()
+        holder.binding.toTxt.text = myObj.endTime.toString()
+        holder.binding.colonTxt.text = " : "
         holder.binding.deleteBtn.setOnClickListener {
             onClick.deleteAlert(myObj)
             notifyDataSetChanged()
