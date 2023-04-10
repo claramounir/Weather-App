@@ -45,23 +45,6 @@ init {
             }
         }
 
-//    private fun getWeather() {
-//        viewModelScope.launch {
-//            var resonseData = repo.getFavorites()
-//            withContext(Dispatchers.Main) {
-//                resonseData
-//                    .catch {
-//                        _favWeather.value = RoomState.Failure(it)
-//
-//                    }
-//                    .collect {
-//                        _favWeather.value = it?.let { it1 -> RoomState.Success(it1) }!!
-//
-//                    }
-//
-//            }
-//        }
-//    }
     }
       fun deleteAlert(alert: AlertModel){
     viewModelScope.launch(Dispatchers.IO){

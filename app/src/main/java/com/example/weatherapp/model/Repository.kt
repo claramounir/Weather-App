@@ -4,6 +4,7 @@ package com.example.weatherapp.model
 import com.example.weatherapp.Constant
 import com.example.weatherapp.data.local.LocalInterface
 import com.example.weatherapp.data.network.ApiResponse
+import com.example.weatherapp.data.network.GetFromApi
 import com.example.weatherforecast.model.SharedPrefrences.SharedManger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 
 
-class Repository (  private var remote: ApiResponse,var localSource: LocalInterface ) :RepositoryInterface {
+class Repository (  private var remote: GetFromApi,var localSource: LocalInterface ) :RepositoryInterface {
 
     lateinit var myResponse: Response<WeatherResponse>
 
