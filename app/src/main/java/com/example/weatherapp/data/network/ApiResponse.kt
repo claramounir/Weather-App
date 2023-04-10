@@ -9,6 +9,7 @@ import retrofit2.create
 import kotlin.math.log
 
 class ApiResponse : GetFromApi{
+    // remote data source
  var api:ApiInterface = RetrofitInstance.retrofitInstance.create(ApiInterface::class.java)
    companion object {
       private var instance: ApiResponse? = null

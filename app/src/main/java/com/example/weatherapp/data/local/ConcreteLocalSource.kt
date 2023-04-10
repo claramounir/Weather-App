@@ -8,7 +8,7 @@ import com.example.weatherapp.model.Favourite
 import kotlinx.coroutines.flow.Flow
 
 class ConcreteLocalSource  constructor(context: Context): LocalInterface {
-
+// local data source
     companion object{
         @Volatile
         private var INSTANCE :ConcreteLocalSource?=null

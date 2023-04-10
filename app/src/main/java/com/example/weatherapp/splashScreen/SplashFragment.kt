@@ -38,7 +38,7 @@ class SplashFragment : Fragment() {
 
         splashScreenScope.launch(Dispatchers.Default) {
             delay(2500)
-            val intent = Intent(requireActivity(), AlertDialogFragment::class.java)
+            val intent = Intent(requireActivity(), MainActivity::class.java)
             startActivity(intent)
             onStop()
         }
